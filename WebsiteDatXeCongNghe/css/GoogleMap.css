@@ -8,7 +8,6 @@
     background: linear-gradient(90deg, #2980b9 0%, #6dd5fa 100%);
     box-shadow: 0 4px 24px rgba(52,152,219,0.18);
     border: none;
-
 }
 
 .navbar-brand, #PassengerName, #PassengerEmail {
@@ -182,6 +181,129 @@ input.input, select.input {
     margin-left: 6px;
 }
 
+@media (max-width: 991px) {
+    .container-fluid .row {
+        flex-direction: column;
+    }
+
+    .col-md-4, .col-md-8 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #googleMap.map {
+        height: 300px;
+    }
+}
+/* Glassmorphism effect for panels */
+.location-form, .fare-details-group, .otp-container, .wrapper, .wrapper2 {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(52,152,219,0.18);
+    padding: 32px 24px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(52,152,219,0.12);
+}
+
+/* Navbar gradient and shadow */
+.navbar-inverse {
+    background: linear-gradient(90deg, #2980b9 0%, #6dd5fa 100%);
+    box-shadow: 0 4px 24px rgba(52,152,219,0.18);
+}
+
+/* Button animation and style */
+.btn, .btnOnlinePayment, .verify-btn {
+    border-radius: 8px !important;
+    font-size: 17px !important;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(52,152,219,0.12);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    letter-spacing: 0.5px;
+}
+
+    .btn:hover, .btnOnlinePayment:hover, .verify-btn:hover {
+        background: linear-gradient(90deg, #6dd5fa 0%, #2980b9 100%);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 32px rgba(52,152,219,0.18);
+    }
+
+/* Inputs and selects */
+input.input, select.input {
+    border: 1.5px solid #6dd5fa;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 16px;
+    background: rgba(245, 249, 255, 0.95);
+    margin-bottom: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    input.input:focus, select.input:focus {
+        border-color: #2980b9;
+        box-shadow: 0 2px 8px rgba(52,152,219,0.12);
+    }
+
+/* Table styling */
+.table#DatXe {
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(52,152,219,0.08);
+    overflow: hidden;
+}
+
+    .table#DatXe td {
+        padding: 12px 10px;
+        font-size: 16px;
+        border-bottom: 1px solid #eaf6fb;
+    }
+
+    .table#DatXe tr:last-child td {
+        border-bottom: none;
+    }
+
+/* Map styling */
+#googleMap.map {
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(52,152,219,0.18);
+    border: 2px solid #6dd5fa;
+    margin-top: 18px;
+    transition: box-shadow 0.2s;
+}
+
+    #googleMap.map:hover {
+        box-shadow: 0 16px 48px rgba(52,152,219,0.24);
+    }
+
+/* Avatar styling */
+#PassengerImage {
+    border-radius: 50%;
+    border: 3px solid #6dd5fa;
+    box-shadow: 0 4px 16px rgba(52,152,219,0.18);
+    margin-left: 14px;
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+}
+
+/* OTP digits */
+.otp-digit {
+    width: 48px;
+    height: 56px;
+    font-size: 28px;
+    text-align: center;
+    margin: 0 8px;
+    border-radius: 8px;
+    border: 2px solid #6dd5fa;
+    background: rgba(245, 249, 255, 0.95);
+    transition: border-color 0.2s;
+}
+
+    .otp-digit:focus {
+        border-color: #2980b9;
+    }
+
+/* Responsive improvements */
 @media (max-width: 991px) {
     .container-fluid .row {
         flex-direction: column;
