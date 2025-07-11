@@ -1,74 +1,148 @@
-﻿/* CSS styles for the offer notice board */
-body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
+﻿/* Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8fbff, #e1ecf7);
+    color: #333;
+    padding: 40px 20px;
+}
+
+/* Container */
 .offer-container {
-    max-width: 600px;
-    margin: 100px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 30px;
 }
 
-h2 {
-    margin-bottom: 20px;
-}
+    .offer-container h2 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 30px;
+        font-size: 26px;
+    }
 
+/* Danh sách khuyến mãi */
 .offer-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
 }
 
+/* Mỗi khuyến mãi */
 .offer-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    background: #f9f9f9;
+    border-left: 6px solid #007bff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    transition: 0.3s;
 }
 
+    .offer-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+/* Số thứ tự */
 .offer-ordinal {
     font-size: 18px;
     font-weight: bold;
-    margin-right: 10px;
+    color: #007bff;
+    margin-bottom: 10px;
+    display: block;
 }
 
+/* Trạng thái */
 .offer-status {
-    margin-right: 10px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.offer-details {
-    text-align: left;
+    .offer-status.valid {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .offer-status.expired {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+/* Thông tin chi tiết */
+.offer-details p {
+    font-size: 15px;
+    margin: 8px 0;
+    line-height: 1.5;
 }
 
 .offer-code {
-    margin: 0;
+    color: #000;
+    font-weight: 600;
 }
 
 .offer-percentage {
-    margin: 5px 0;
+    color: #28a745;
     font-weight: bold;
 }
 
-.offer-dates,
-.offer-conditions {
-    margin: 0;
-    color: #777;
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .offer-item {
+        padding: 15px;
+    }
+
+    .offer-container {
+        padding: 20px;
+    }
+
+        .offer-container h2 {
+            font-size: 22px;
+        }
+
+    .offer-status {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
+.favorite.styled {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
-.offer-status.valid {
-    background-color: #4caf50;
-}
+    .favorite.styled:hover {
+        background: linear-gradient(135deg, #218838, #1e7e34);
+        box-shadow: 0 6px 16px rgba(33, 136, 56, 0.4);
+        transform: translateY(-2px);
+    }
 
-.offer-status.expired {
-    background-color: #f44336;
-}
+    .favorite.styled:active {
+        transform: scale(0.96);
+        box-shadow: 0 3px 8px rgba(33, 136, 56, 0.3);
+    }

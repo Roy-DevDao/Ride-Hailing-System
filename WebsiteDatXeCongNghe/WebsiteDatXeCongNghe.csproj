@@ -550,6 +550,7 @@
     <Content Include="css\signin.css" />
     <Content Include="css\Style.css" />
     <Content Include="css\style.min.css" />
+    <Content Include="css\Style1.css" />
     <Content Include="css\table.css" />
     <Content Include="css\TaiKhoanNganHangTX.css" />
     <Content Include="css\TaiXe.css" />
@@ -917,6 +918,7 @@
     <Content Include="css\themify-icons\themify-icons.css" />
     <Content Include="css\ThongKeDoanhThu.css" />
     <Content Include="css\ThongKeDoanhThu2.css" />
+    <Content Include="css\ThongTinDatXe.css" />
     <Content Include="css\ThongTinThanhToan.css" />
     <Content Include="css\ThongTinThanhToan2.css" />
     <Content Include="css\TienMat.css" />
