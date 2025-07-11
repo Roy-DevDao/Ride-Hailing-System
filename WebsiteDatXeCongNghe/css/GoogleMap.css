@@ -8,6 +8,7 @@
     background: linear-gradient(90deg, #2980b9 0%, #6dd5fa 100%);
     box-shadow: 0 4px 24px rgba(52,152,219,0.18);
     border: none;
+
 }
 
 .navbar-brand, #PassengerName, #PassengerEmail {
