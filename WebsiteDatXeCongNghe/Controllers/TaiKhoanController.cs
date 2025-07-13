@@ -192,10 +192,19 @@ namespace WebsiteDatXeCongNghe.Controllers
                 // Kiểm tra mật khẩu cũ
                 if (taiKhoan.MatKhau != model.MatKhauHienTai)
                 {
-                    ModelState.AddModelError("", "Mật khẩu cũ không đúng.");
+                    ModelState.AddModelError("MatKhauHienTai", "Mật khẩu cũ không đúng.");
                     return View("DoiMatKhau");
                 }
-
+                if ( model.MatKhauMoi != model.NhapLaiMatKhauMoi)
+                {
+                    ModelState.AddModelError("NhapLaiMatKhauMoi", "Mật khẩu mới và nhập lại mật khẩu mới không khớp.");
+                    return View("DoiMatKhau");
+                }
+                if ( model.MatKhauMoi == model.MatKhauHienTai)
+                {
+                    ModelState.AddModelError("MatKhauMoi", "Mật khẩu mới trùng với mật khẩu hiện tại");
+                    return View("DoiMatKhau");
+                }
 
 
                 // Cập nhật mật khẩu mới

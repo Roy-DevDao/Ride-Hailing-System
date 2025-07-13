@@ -32,7 +32,7 @@
                 
                 <div class="seach" style="font-size: 20px">
                     <form>
-                        <input type="text" id="Search" placeholder="Search..." class="input"><a href=""><i class="icon ti-search"></i></a>
+                        <input type="text" id="Search" placeholder="Search..." class="input">
                     </form>
                 </div>
             </div>
@@ -79,6 +79,9 @@
 
                     </tbody>
                 </table>
+                <div class="pagination">
+
+                </div>
             </form>
         </div>
 
@@ -86,7 +89,7 @@
 
     </div>
 
-    <style>
+    @*<style>
         .confirmation-box {
             position: fixed;
             z-index: 9999;
@@ -132,11 +135,7 @@
                         color: #333;
                         border: none;
                     }
-    </style>
-
-
-
-
+    </style>*@
 
     @*<script>
         $(document).ready(function () {
@@ -187,23 +186,76 @@
         }
     </script>*@
     <script>
-        $(document).ready(function () {
-            function Contains(text_one, text_two) {
-                if (text_one.indexOf(text_two) != -1)
-                    return true;
-            }
-            $("#Search").keyup(function () {
-                var searchText = $("#Search").val().toLowerCase();
-                $(".Search").each(function () {
-                    if (!Contains($(this).text().toLowerCase(), searchText)) {
-                        $(this).hide();
-                    }
-                    else {
-                        $(this).show();
-                    }
-                });
+
+
+        $("#Search").on("input", function () {
+            let keyword = $(this).val().toLowerCase();
+            $(".table-body tr").each(function () {
+                let rowText = $(this).text().toLowerCase();
+                $(this).toggle(rowText.includes(keyword));
             });
         });
+            $(document).ready(function () {
+                const rowsPerPage = 4;
+                let currentPage = 1;
+
+                function paginateRows() {
+                    let keyword = $("#Search").val().toLowerCase();
+                    let rows = $(".table-body tr").filter(function () {
+                        return $(this).text().toLowerCase().includes(keyword);
+                    });
+
+                    $(".table-body tr").hide();
+                    let totalPages = Math.ceil(rows.length / rowsPerPage);
+                    let start = (currentPage - 1) * rowsPerPage;
+                    let end = start + rowsPerPage;
+
+                    rows.slice(start, end).show();
+                    updatePaginationControls(totalPages);
+                }
+
+                function updatePaginationControls(totalPages) {
+                    let paginationHtml = "";
+
+                    // Mũi tên trái
+                    paginationHtml += `<button class="page-btn prev-btn" data-page="prev">&laquo;</button>`;
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        let activeClass = (i === currentPage) ? "active" : "";
+                        paginationHtml += `<button class="page-btn ${activeClass}" data-page="${i}">${i}</button>`;
+                    }
+
+                    // Mũi tên phải
+                    paginationHtml += `<button class="page-btn next-btn" data-page="next">&raquo;</button>`;
+
+                    $(".pagination").html(paginationHtml);
+                }
+
+                $("#Search").on("input", function () {
+                    currentPage = 1; // Reset to first page after search
+                    paginateRows();
+                });
+
+                $(".pagination").on("click", ".page-btn", function () {
+                    let page = $(this).data("page");
+                    let keyword = $("#Search").val().toLowerCase();
+                    let rows = $(".table-body tr").filter(function () {
+                        return $(this).text().toLowerCase().includes(keyword);
+                    });
+                    let totalPages = Math.ceil(rows.length / rowsPerPage);
+
+                    if (page === "prev" && currentPage > 1) currentPage--;
+                    else if (page === "next" && currentPage < totalPages) currentPage++;
+                    else if (!isNaN(page)) currentPage = parseInt(page);
+
+                    paginateRows();
+                });
+
+
+                paginateRows(); // Initial load
+            });
+
+
     </script>
     
 

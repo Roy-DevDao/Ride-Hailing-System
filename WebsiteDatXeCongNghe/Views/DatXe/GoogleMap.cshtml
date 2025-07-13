@@ -99,12 +99,6 @@
                                     <a role="button" data-toggle="collapse" data-parent="#locationDetails" href="#locationSection" aria-expanded="true" aria-controls="locationSection">
                                         Thông tin vị trí
                                     </a>
-                                    <div class="checkbox pull-right">
-                                        <label>
-                                            <input id="chkOptimizePath" type="checkbox" />
-                                            Tối ưu hóa chỉ dẫn
-                                        </label>
-                                    </div>
                                 </h4>
                             </div>
                             <div id="locationSection" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="locationDetailsHeading">
@@ -407,6 +401,16 @@
                                 var discountFare = $("#discountFare").text();
                                 var discountFareTotal = $("#discountFareTotal").text();
 
+                                if (payment == null || payment == "")
+                                {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Thông báo',
+                                        text: 'Vui lòng chọn phương thức thanh toán',
+                                        confirmButtonText: 'OK'
+                                    });
+                                    return;
+                                }
                                 if (totalFare == "" || totalFare == null) {
                                     return;
                                 }
@@ -674,18 +678,17 @@
             <div id="paymentMethodSection" style="display:none;">
                 <form>
                     <fieldset>
-                        <label for="cash">
-                            <input type="radio" name="ThanhToan" value="Tiền mặt" checked="checked" onchange="displayRadioValue()" />
-                            <i class="fa fa-money" aria-hidden="true"></i>
+                        <div class="payment-card" data-value="Tiền mặt">
+                            <i class="fa fa-money"></i>
                             <span>Tiền mặt</span>
-                        </label> <br />
-                        <label for="card">
-                            <input type="radio" name="ThanhToan" value="Qua thẻ" onchange="displayRadioValue()" />
-                            <i class="fa fa-credit-card" aria-hidden="true"></i>
-                            <button class="favorite styled" type="button" id="CardPayment">Qua thẻ</button>
-                        </label> <br />
+                        </div>
+                        <div class="payment-card" data-value="Qua thẻ">
+                            <i class="fa fa-credit-card"></i>
+                            <span>Qua thẻ</span>
+                        </div>
+                        <br />
                         <label for="cards">
-                            Số dư thẻ: <input type="text" id="CardBalance2" class="input" readonly>
+                            Số dư thẻ <input type="text" id="CardBalance2" class="input" readonly>
                             <input type="text" id="CardId" class="input" readonly>
                             <input type="text" id="CardId2" class="input" readonly style="display:none;">
                             <input type="text" id="CardId4" class="input" readonly style="display:none;">
@@ -841,6 +844,13 @@
             $('.otp-container').show();
             $('.overlay2').show();
         }
+        $(document).ready(function () {
+            $(".payment-card").click(function () {
+                $(".payment-card").removeClass("selected");
+                $(this).addClass("selected");
+                $("#result").text($(this).data("value"));
+            });
+        });
     </script>
 
     <script>

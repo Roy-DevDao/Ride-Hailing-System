@@ -45,19 +45,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="Mật khẩu cũ"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="MatKhauHienTai"  placeholder="Nhập mật khẩu cũ..." />
-                                @Html.ValidationMessageFor(model => model.MatKhauHienTai)
+                                <input type="password" name="MatKhauHienTai" placeholder="Nhập mật khẩu cũ..." />
                             </div>
+                            @Html.ValidationMessageFor(model => model.MatKhauHienTai)
                             <div class="form-group">
                                 <label for="Mật khẩu mới"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="MatKhauMoi"  placeholder="Nhập mật khẩu mới..." />
-                                @Html.ValidationMessageFor(model => model.MatKhauMoi)
+                                <input type="password" name="MatKhauMoi" placeholder="Nhập mật khẩu mới..." />
                             </div>
                             <div class="form-group">
                                 <label for="Nhập lại mật khẩu mới"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="NhapLaiMatKhauMoi" placeholder="Nhập lại mật khẩu mới..." />
-                                @Html.ValidationMessageFor(model => model.NhapLaiMatKhauMoi)
                             </div>
+                            @Html.ValidationMessageFor(model => model.MatKhauMoi)
+                            @Html.ValidationMessageFor(model => model.NhapLaiMatKhauMoi)
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me"
                                        class="agree-term" />
@@ -70,7 +70,7 @@
                                        class="form-submit" value="Đổi mật khẩu" />
                             </div>
                         </form>
-                        <div class="social-login">
+                        @*<div class="social-login">
                             <span class="social-label">Đăng nhập với</span>
                             <ul class="socials">
                                 <li>
@@ -89,7 +89,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
