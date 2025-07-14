@@ -81,3 +81,75 @@ td button {
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
+/* ===== Nút "Quay lại" nổi bật ===== */
+.favorite.styled {
+    background: #3498db; /* xanh dương */
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.15s ease;
+}
+
+    .favorite.styled:hover {
+        background: #2874b3; /* đậm hơn */
+        transform: translateY(-2px);
+    }
+
+    .favorite.styled:active {
+        transform: translateY(0);
+    }
+
+/* ===== Hộp Search bo tròn ===== */
+.seach {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+    .seach .input {
+        padding: 8px 40px 8px 16px; /* chừa chỗ icon */
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        font-size: 14px;
+        width: 220px;
+        transition: all 0.3s ease;
+    }
+
+        .seach .input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,.2);
+        }
+
+    /* nút/icon tìm kiếm */
+    .seach a {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #3498db;
+        color: #fff;
+        border-radius: 20px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .3s;
+    }
+
+        .seach a:hover {
+            background: #2874b3;
+        }
+.no-decoration {
+    background-color: #adacac
+}
+/* Nếu muốn icon ti-search của Themify trắng luôn */
+.icon.ti-search {
+    color: #fff;
+    font-size: 14px;
+}

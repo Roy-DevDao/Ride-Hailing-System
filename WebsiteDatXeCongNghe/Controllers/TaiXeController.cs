@@ -72,7 +72,7 @@ namespace WebsiteDatXeCongNghe.Controllers
                 MaTX = TaiXe.MaTX,
                 SoDienThoai = TaiXe.SoDienThoai,
                 Ten = TaiXe.Ten,
-                NgayThangNamSinh = TaiXe.NgayThangNamSinh,
+                NgayThangNamSinh = TaiXe.NgayThangNamSinh.ToString("yyyy-MM-dd"),
                 Email = TaiXe.Email,
                 BienSo = TaiXe.BienSo,
                 CCCD = TaiXe.CCCD,
@@ -85,22 +85,32 @@ namespace WebsiteDatXeCongNghe.Controllers
 
 
         [HttpPost]
-        public ActionResult SuaDoiTX(TaiXe tx, HttpPostedFileBase HinhAnhUpload)
+        public ActionResult SuaDoiTX(TaiXe tx, HttpPostedFileBase HinhAnhUpload, string OldHinhAnh)
         {
-            if (HinhAnhUpload != null)
+            var taiXeCu = db.TaiXes.SingleOrDefault(t => t.MaTX == tx.MaTX);
+            if (taiXeCu == null) return RedirectToAction("ThongTinCaNhanTaiXe");
+
+            // cập nhật trường text
+            taiXeCu.Ten = tx.Ten;
+            taiXeCu.NgayThangNamSinh = tx.NgayThangNamSinh;
+            taiXeCu.Email = tx.Email;
+            taiXeCu.SoDienThoai = tx.SoDienThoai;
+            taiXeCu.BienSo = tx.BienSo;
+            taiXeCu.CCCD = tx.CCCD;
+
+            // xử lý ảnh
+            if (HinhAnhUpload != null && HinhAnhUpload.ContentLength > 0)
             {
-                string path = uploadimage(HinhAnhUpload);
-                tx.HinhAnh = path;
+                string fileName = uploadimage(HinhAnhUpload);   
+                if (fileName != "-1") taiXeCu.HinhAnh = fileName;
+            }
+            else
+            {
+                taiXeCu.HinhAnh = OldHinhAnh;                   
             }
 
-            if (ModelState.IsValid)
-            {
-                db.Entry(tx).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ThongTinCaNhanTaiXe");
-            }
-
-            return View(tx);
+            db.SaveChanges();                                  
+            return RedirectToAction("ThongTinCaNhanTaiXe");
         }
 
         public string uploadimage(HttpPostedFileBase file)

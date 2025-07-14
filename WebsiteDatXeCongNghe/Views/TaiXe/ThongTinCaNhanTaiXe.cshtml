@@ -72,11 +72,11 @@
                                 <td>@item.MaTX</td>
                                 <td>@item.SoDienThoai</td>
                                 <td>@item.Ten</td>
-                                <td>@item.NgayThangNamSinh.ToString("yyyy-MM-dd")</td>
+                                <td>@item.NgayThangNamSinh.ToString("dd/MM/yyyy")</td>
                                 <td>@item.Email</td>
                                 <td>@item.BienSo</td>
                                 <td>@item.CCCD</td>
-                                <td>@item.NgayDangKy.ToString("yyyy-MM-dd")</td>
+                                <td>@(item.NgayDangKy?.ToString("dd/MM/yyyy"))</td>
                                 <td><img src="~/image/TaiXe/@item.HinhAnh" style="height: 150px;width: 150px" id="avatar-image"></td>
                                 <td>@item.MucDoDanhGiaTB</td>
                                 <td>@item.DiemUyTin</td>
@@ -107,7 +107,7 @@
                 <form method="post" action="SuaDoiTX" enctype="multipart/form-data">
                     <div class="add-nhap">
                         <label for="MaTX">Mã Tài Xế</label>
-                        <input type="text" class="input" name="MaTaiXe" id="MaTX" readonly>
+                        <input type="text" class="input" name="MaTX" id="MaTX" readonly>
                     </div>
                     <div class="add-nhap">
                         <label for="SoDienThoai">Số điện thoại</label>
@@ -133,11 +133,13 @@
                         <label for="CCCD">CCCD</label>
                         <input type="text" class="input" name="CCCD" id="CCCD">
                     </div>
+                    <input type="hidden" name="OldHinhAnh" id="OldHinhAnh" />
                     <div class="image-input">
-                        <label for="HinhAnhUpload">Hình ảnh</label>
-                        <img src="" style="width: 320px; height: 130px" id="image" />
-                        <img id="image-preview" alt="your image" title="" style="display: none" />
-                        <input type="file" id="file-input" name="HinhAnhUpload" onchange="change_image()">
+                        <label>Hình ảnh</label><br />
+                        <img id="image" style="width:320px;height:200px; display:block; margin: 0 auto;" />
+                        <img id="image-preview" style="display:none; width:320px;height:200px; display:block; margin: 0 auto;" />
+                        <input type="file" id="file-input" name="HinhAnhUpload"
+                               onchange="change_image()" />
                     </div>
                     <div class="btn-add">
                         <button class="btn submit">Xác Nhận</button>
@@ -153,10 +155,8 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $('#image-preview').attr('src', e.target.result);
-                    $('#image-preview').hide();
+                    $('#image').hide();
                     $('#image-preview').fadeIn(650);
-                    $('#image-preview').css('display', 'block');
-                    $('#image').css('display', 'none');
                 };
                 reader.readAsDataURL(input.files[0]);
             }
@@ -171,11 +171,16 @@
                     $('#MaTX').val(data.MaTX);
                     $('#SoDienThoai').val(data.SoDienThoai);
                     $('#Ten').val(data.Ten);
-                    $('#NgayThangNamSinh').val(data.NgayThangNamSinh.split('T')[0]);
+                    console.log('Ngay server tra:', data.NgayThangNamSinh); // debug
+                    $('#NgayThangNamSinh').val(data.NgayThangNamSinh);
                     $('#Email').val(data.Email);
                     $('#BienSo').val(data.BienSo);
                     $('#CCCD').val(data.CCCD);
-                    $('#avatar-image').attr('src', '/image/TaiXe/' + data.HinhAnh);
+                    const src = data.HinhAnh ? '/image/TaiXe/' + data.HinhAnh : '/image/no-image.png';
+                    $('#image').attr('src', src).show();        // hien anh goc
+                    $('#image-preview').hide();                 // an anh preview neu co
+                    $('#file-input').val('');                   // reset input file
+                    $('#OldHinhAnh').val(data.HinhAnh);
                     $('.form-edit').addClass('open-edit');
                 },
                 error: function () {

@@ -188,7 +188,7 @@
                             </div>
                             <h2 style="display:none;">@item.MaGiaoDich</h2>
                             <h2>@item.SoDienThoai</h2>
-                            <h2>@item.NgayGiaoDich.ToString("yyyy-MM-dd")</h2>
+                            <h2>@(item.NgayGiaoDich?.ToString("yyyy-MM-dd"))</h2>
                             <p>Loại giao dịch: @item.LoaiGiaoDich</p>
                             <p>Số tiền: @item.SoTien</p>
                             <p>Thành công</p>
