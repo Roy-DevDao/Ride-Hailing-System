@@ -10,10 +10,13 @@
     <link href="~/css/KhuyenMai.css" rel="stylesheet" />
 </head>
 <body>
-    
+    <a href="/TaiKhoan/Services"><button class="favorite styled" type="button">Quay lại</button></a>
 
     <div class="offer-container">
         <h2>Thông báo khuyến mãi khi đặt xe</h2>
+        <div class="search-bar" style="margin-bottom:18px;">
+            <input type="text" id="searchKhuyenMai" class="input" placeholder="Tìm mã khuyến mãi..." style="width:220px; padding:8px; border-radius:8px; border:1.5px solid #6dd5fa;">
+        </div>
         <div class="offer-list">
             @foreach (var item in Model)
             {
@@ -31,12 +34,113 @@
                     </div>
                 </div>
             }
-            <!-- Add more offer items here -->
+            <div class="pagination-controls">
+                <button id="prevPage" class="page-btn">←</button>
+                <button id="nextPage" class="page-btn">→</button>
+            </div>
         </div>
     </div>
 
 
+    <script>
+        document.getElementById("searchKhuyenMai").addEventListener("input", function () {
+            const keyword = this.value.toLowerCase();
+            const items = document.querySelectorAll(".offer-item");
 
+            items.forEach(item => {
+                const fullText = item.textContent.toLowerCase();
+
+                if (fullText.includes(keyword)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+            updatePaginationAfterSearch();
+        });
+        const items = document.querySelectorAll('.offer-item');
+        const itemsPerPage = 5;
+        let currentPage = 1;
+        const totalPages = Math.ceil(items.length / itemsPerPage);
+
+        const prevBtn = document.getElementById("prevPage");
+        const nextBtn = document.getElementById("nextPage");
+        const pageInfo = document.getElementById("pageInfo");
+
+        function showPage(page) {
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+
+            items.forEach((item, index) => {
+                item.style.display = "none";
+            });
+
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+
+            items.forEach((item, index) => {
+                if (index >= start && index < end) {
+                    item.style.display = "block";
+                }
+            });
+
+            pageInfo.textContent = `Trang ${page} / ${totalPages}`;
+
+            prevBtn.disabled = page === 1;
+            nextBtn.disabled = page === totalPages;
+        }
+
+        function updatePaginationAfterSearch() {
+            const visibleItems = Array.from(document.querySelectorAll(".offer-item"))
+                .filter(item => item.style.display !== "none");
+
+            currentPage = 1;
+            totalPages = Math.ceil(visibleItems.length / itemsPerPage);
+
+            function showFilteredPage(page) {
+                if (page < 1) page = 1;
+                if (page > totalPages) page = totalPages;
+
+                visibleItems.forEach((item, index) => {
+                    item.style.display = "none";
+                });
+
+                const start = (page - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+
+                visibleItems.forEach((item, index) => {
+                    if (index >= start && index < end) {
+                        item.style.display = "block";
+                    }
+                });
+
+                pageInfo.textContent = `Trang ${page} / ${totalPages}`;
+                prevBtn.disabled = page === 1;
+                nextBtn.disabled = page === totalPages;
+            }
+
+            // Gán lại các nút ← →
+            prevBtn.onclick = function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showFilteredPage(currentPage);
+                }
+            };
+
+            nextBtn.onclick = function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showFilteredPage(currentPage);
+                }
+            };
+
+            // Hiển thị trang đầu tiên
+            showFilteredPage(currentPage);
+        }
+
+
+        showPage(currentPage);
+    </script>
 </body>
 </html>
 

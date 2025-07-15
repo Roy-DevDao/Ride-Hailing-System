@@ -38,6 +38,7 @@ section {
     text-align: center;
     font-size: 4.5rem;
     color: var(--black);
+    margin-top: 50px;
 }
 
     .heading span {
