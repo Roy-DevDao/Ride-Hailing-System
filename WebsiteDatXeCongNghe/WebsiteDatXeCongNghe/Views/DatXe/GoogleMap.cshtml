@@ -23,9 +23,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 
     <link href="~/css/style.min.css" rel="stylesheet" />
-
-
-
+    <link href="~/css/GoogleMap.css" rel="stylesheet" />
 
     <script src="~/js/bootstrap.min.js"></script>
 
@@ -64,16 +62,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="google map.jsp">Đặt xe máy</a>
-                @foreach (var kh in Model)
-                {
-                    @*<span id="PassengerName">@kh.Ten</span>*@
-                    <a class="navbar-brand" id="PassengerName">@kh.Ten</a>
-                    <a class="navbar-brand" id="PassengerEmail">@kh.Email</a>
+                <a href="/TaiKhoan/Services">
+                    <button id="btnBack" type="button" class="col-xs-5 btn btn-danger" style="width : 150px">
+                        <span class="glyphicon glyphicon-remove-sign"></span> Quay lại
+                    </button>
+                </a>
+                <div class="user-infor">
+                    @foreach (var kh in Model)
+                    {
+                        <img src="~/image/KhachHang/@kh.HinhAnh" alt="" width="50" height="50" id="PassengerImage">
+                        <a class="navbar-brand" id="PassengerName">@kh.Ten</a>
+                    }
+                </div>
 
-                    <img src="~/image/KhachHang/@kh.HinhAnh" alt="" width="50" height="50" id="PassengerImage">
-
-                }
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -98,12 +99,6 @@
                                     <a role="button" data-toggle="collapse" data-parent="#locationDetails" href="#locationSection" aria-expanded="true" aria-controls="locationSection">
                                         Thông tin vị trí
                                     </a>
-                                    <div class="checkbox pull-right">
-                                        <label>
-                                            <input id="chkOptimizePath" type="checkbox" />
-                                            Tối ưu hóa chỉ dẫn
-                                        </label>
-                                    </div>
                                 </h4>
                             </div>
                             <div id="locationSection" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="locationDetailsHeading">
@@ -120,26 +115,14 @@
                                         <button id="btnCalculateFare" type="button" class="col-xs-6 btn btn-primary">
                                             <span class="glyphicon glyphicon-ok-sign"></span> Giá tiền
                                         </button>
-                                        <button id="btnGetJson" type="button" class="col-xs-5 btn btn-primary">
-                                            <span class="glyphicon glyphicon-ok-sign"></span> Xem thông tin
-                                        </button>
-                                        <button id="btnBooking" type="button" class="col-xs-6 btn btn-success">
-                                            <span class="glyphicon glyphicon-plus-sign"></span> Đặt ngay
-                                        </button>
-                                        <button id="btnBookings" type="button" class="col-xs-6 btn btn-success" style="display:none;">
-                                            <span class="glyphicon glyphicon-plus-sign"></span>
-                                        </button>
+
                                         <button id="btnGetCurrentLocation" type="button" class="col-xs-5 btn btn-success">
                                             <span class="glyphicon glyphicon-plus-sign"></span> Lấy vị trí hiện tại
                                         </button>
-                                        <a href="/TaiKhoan/Services">
-                                            <button id="btnBack" type="button" class="col-xs-5 btn btn-danger">
-                                                <span class="glyphicon glyphicon-remove-sign"></span> Quay lại
-                                            </button>
-                                        </a>
-                                        <button id="btnDirection" type="button" class="col-xs-6 btn btn-success" style="display:none;">
-                                            <span class="glyphicon glyphicon-plus-sign"></span> Điều hướng
-                                        </button>
+
+                                        @*<button id="btnDirection" type="button" class="col-xs-6 btn btn-success" style="display:none;">
+                                                <span class="glyphicon glyphicon-plus-sign"></span> Điều hướng
+                                            </button>*@
                                         <div id="popup" class="popup" style="display:none;">
                                             <div class="popup-content">
                                                 <div class="popup-header">
@@ -175,9 +158,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <label for="cash">
-                                            <span>Lựa chọn phương thức thanh toán</span>
-                                        </label>
                                         <style>
                                             #buttonContainer {
                                                 text-align: center;
@@ -222,55 +202,6 @@
                                             }
                                         </style>
 
-
-
-                                        <form>
-                                            <fieldset>
-                                                <label for="cash">
-                                                    <input type="radio" name="ThanhToan" value="Tiền mặt" checked="checked" onchange="displayRadioValue()" />
-                                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                                    <span>Tiền mặt</span>
-                                                </label> <br />
-                                                <label for="card">
-                                                    <input type="radio" name="ThanhToan" value="Qua thẻ" onchange="displayRadioValue()" />
-                                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
-                                                    <button class="favorite styled" type="button" id="CardPayment">Qua thẻ</button>
-                                                </label> <br />
-                                                <label for="cards">
-                                                    Số dư thẻ: <input type="text" id="CardBalance2" class="input" readonly>
-                                                    <input type="text" id="CardId" class="input" readonly>
-                                                    <input type="text" id="CardId2" class="input" readonly style="display:none;">
-                                                    <input type="text" id="CardId4" class="input" readonly style="display:none;">
-                                                    <input type="text" id="CardHolder" class="input" readonly style="display:none;">
-                                                    <input type="text" id="ExpirationMonth" class="input" readonly style="display:none;">
-                                                    <input type="text" id="ExpirationYear" class="input" readonly style="display:none;">
-                                                    <input type="text" id="CVV" class="input" readonly style="display:none;">
-                                                </label> <br />
-                                            </fieldset>
-
-
-                                            <script>
-                                                function displayRadioValue() {
-                                                    var ele = document.getElementsByName('ThanhToan');
-
-                                                    for (i = 0; i < ele.length; i++) {
-                                                        if (ele[i].checked)
-                                                            document.getElementById("result").innerHTML = "" + ele[i].value;
-                                                    }
-                                                }
-
-                                                // Call the function on page load to set the default payment method
-                                                window.onload = displayRadioValue;
-                                            </script>
-                                            <label for="promotionalCode">Áp dụng mã khuyến mãi:</label>
-                                            <select name="promotionalCode" id="promotionalCode">
-                                                <option value="">Chọn mã...</option>
-
-                                                <!-- Add more options as needed -->
-                                            </select>
-
-
-                                        </form>
 
 
                                     </div>
@@ -443,18 +374,16 @@
                         $.connection.hub.start().done(function () {
                             console.log('SignalR connection started.');
 
-                            // Function to cancel the ride and show an announcement
                             function cancelRideAndAnnounce() {
                                 bookingHub.server.passengerCancelsSearchRide();
                                 swal("Rất tiếc", "Không thể tìm thấy tài xế xung quanh đây, vui lòng thử lại!", "info");
-                                Swal.close(); // Close the "Finding a driver" Swal
+                                Swal.close();
                                 setTimeout(function () {
                                     $('#CancelCircle').trigger('click');
                                 }, 100);
                                 $("#SurchareFee").hide();
                             }
 
-                            // send data through the connection
                             $("#btnBooking").click(function (e) {
                                 var distance = $("#distance").text();
                                 var duration = $("#duration").text();
@@ -472,9 +401,19 @@
                                 var discountFare = $("#discountFare").text();
                                 var discountFareTotal = $("#discountFareTotal").text();
 
-                                // Define a global variable to communicate booking confirmation
-
-                                // Show the Swal alert to confirm the booking
+                                if (payment == null || payment == "")
+                                {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Thông báo',
+                                        text: 'Vui lòng chọn phương thức thanh toán',
+                                        confirmButtonText: 'OK'
+                                    });
+                                    return;
+                                }
+                                if (totalFare == "" || totalFare == null) {
+                                    return;
+                                }
                                 swal({
                                     title: "Đặt xe",
                                     text: "Bạn có chắc chắn muốn đặt xe chứ?",
@@ -485,7 +424,7 @@
                                     .then((willBook) => {
                                         if (willBook) {
                                             var Status = false;
-                                            console.log('bat dau');
+
 
                                             e.preventDefault();
                                             $.ajax({
@@ -507,11 +446,10 @@
                                                     PassengerName: PassengerName,
                                                     PassengerEmail: PassengerEmail
                                                 },
-
                                                 success: function (result) {
                                                     // Assign the value to a variable
                                                     MaDatXe = result.MaDatXe;
-                                                    console.log(MaDatXe);
+
                                                     // Update the content of the <span id="MaDatXe"></span> with the received MaDatXe value
                                                     $("#MaDatXe").text(MaDatXe);
 
@@ -570,25 +508,6 @@
                                                                     url: '/DatXe/Refund',
                                                                     data: { amount: amountToRefund, PhoneNumber: phoneNumber, SoThe: cardId },
                                                                     success: function (response) {
-                                                                        //if (response.success) {
-                                                                        //    // Format the numbers with thousand separators
-                                                                        //    var formattedBalanceCard = Number(response.balanceCard).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-
-                                                                        //    // Replace commas with dots
-                                                                        //    formattedBalanceCard = formattedBalanceCard.replace(/,/g, '.');
-
-                                                                        //    $('#CardBalance2').val(formattedBalanceCard + " VND");
-
-                                                                        //    // Additional actions after refund success if needed
-
-                                                                        //} else {
-                                                                        //    // Display error message
-                                                                        //    Swal.fire({
-                                                                        //        icon: 'error',
-                                                                        //        title: 'Lỗi',
-                                                                        //        text: response.message
-                                                                        //    });
-                                                                        //}
                                                                     },
                                                                     // Handle AJAX error if needed
                                                                     error: function (xhr, status, error) {
@@ -656,7 +575,7 @@
                         CardHolder: CardHolder,
                         ExpirationMonth: ExpirationMonth,
                         ExpirationYear: ExpirationYear,
-                        CVV: CVV,                        
+                        CVV: CVV,
                     },
                     success: function (data) {
                         // Redirect to the new page
@@ -756,6 +675,60 @@
             <div class="col-md-8 google-map-wrap">
                 <div id="googleMap" class="map"></div>
             </div>
+            <div id="paymentMethodSection" style="display:none;">
+                <form>
+                    <fieldset>
+                        <div class="payment-card" data-value="Tiền mặt">
+                            <i class="fa fa-money"></i>
+                            <span>Tiền mặt</span>
+                        </div>
+                        <div class="payment-card" data-value="Qua thẻ">
+                            <i class="fa fa-credit-card"></i>
+                            <span>Qua thẻ</span>
+                        </div>
+                        <br />
+                        <label for="cards">
+                            Số dư thẻ <input type="text" id="CardBalance2" class="input" readonly>
+                            <input type="text" id="CardId" class="input" readonly>
+                            <input type="text" id="CardId2" class="input" readonly style="display:none;">
+                            <input type="text" id="CardId4" class="input" readonly style="display:none;">
+                            <input type="text" id="CardHolder" class="input" readonly style="display:none;">
+                            <input type="text" id="ExpirationMonth" class="input" readonly style="display:none;">
+                            <input type="text" id="ExpirationYear" class="input" readonly style="display:none;">
+                            <input type="text" id="CVV" class="input" readonly style="display:none;">
+                        </label> <br />
+                    </fieldset>
+
+
+                    <script>
+                        function displayRadioValue() {
+                            var ele = document.getElementsByName('ThanhToan');
+
+                            for (i = 0; i < ele.length; i++) {
+                                if (ele[i].checked)
+                                    document.getElementById("result").innerHTML = "" + ele[i].value;
+                            }
+                        }
+
+                        // Call the function on page load to set the default payment method
+                        window.onload = displayRadioValue;
+                    </script>
+                    <label for="promotionalCode">Áp dụng mã khuyến mãi:</label>
+                    <select name="promotionalCode" id="promotionalCode">
+                        <option value="">Chọn mã...</option>
+
+                        <!-- Add more options as needed -->
+                    </select>
+
+
+                </form>
+                <button id="btnBooking" type="button" class="col-xs-6 btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Đặt ngay
+                </button>
+                <button id="btnBookings" type="button" class="col-xs-6 btn btn-success" style="display:none;">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -782,6 +755,9 @@
     <div class="overlay"></div>
     <div class="wrapper" style="display:none;">
         <div class="payment">
+            <label for="cash">
+                <span>Lựa chọn phương thức thanh toán</span>
+            </label>
             <span id="closePaymentForm" class="close-icon">X</span>
             <div class="payment-logo">
                 <p><img src="~/image/TaiXe/VisaIcon.png" alt="Visa Icon" style="max-width: 100%; vertical-align: middle;"></p>
@@ -848,42 +824,6 @@
         </div>
     </div>
 
-    @*<script>
-            //$(document).ready(function () {
-                // Function to show the deposit form
-                function showCardPaymentForm(discountFareTotal) {
-                    $('.wrapper').show();
-                    $('.overlay').show();
-                    // Update the form with the provided data (format numbers with dots)
-                    $('#RidePrice').val(Number(discountFareTotal.replace(/\D/g, '')).toLocaleString('vi-VN'));
-                }
-
-
-
-                // Function to close the deposit form
-                function closeCardPaymentForm() {
-                    $('.wrapper').hide();
-                    $('.overlay').hide();
-
-                }
-
-                // Click event for opening the deposit form
-                $("#CardPayment").click(function () {
-                    var discountFareTotal = $('#discountFareTotal').text().trim();
-                    // Show the deposit form and pass the data
-                    showCardPaymentForm(discountFareTotal);
-                });
-
-                // Click event for closing the deposit form
-                $("#closePaymentForm").click(function () {
-                    closeCardPaymentForm();
-                });
-
-
-
-            });
-        </script>*@
-
     <script>
         const overlay2 = document.querySelector('.overlay2');
         const OTPContainer = document.querySelector('.otp-container');
@@ -904,6 +844,13 @@
             $('.otp-container').show();
             $('.overlay2').show();
         }
+        $(document).ready(function () {
+            $(".payment-card").click(function () {
+                $(".payment-card").removeClass("selected");
+                $(this).addClass("selected");
+                $("#result").text($(this).data("value"));
+            });
+        });
     </script>
 
     <script>
