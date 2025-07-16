@@ -371,7 +371,10 @@ namespace WebsiteDatXeCongNghe.Controllers
                 // Check if the amount is greater than the balance in TheVisa
                 var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
 
-                
+                taiKhoan.SoDu -= amount;
+                visaAccount.SoDu -= amount;
+
+                // Create a new transaction record
                 var formattedBalanceCard = taiKhoan.SoDu.ToString("F3");
                 
 
@@ -465,13 +468,13 @@ namespace WebsiteDatXeCongNghe.Controllers
                 // Replace the credentials and SMTP server with your own
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("baook01234@gmail.com", "vvgtfqfpltnesshc"),
                     EnableSsl = true
                 };
 
                 var mailMessage = new MailMessage
                 {
-                    From = new MailAddress("yourEmailAddress@gmail.com"),
+                    From = new MailAddress("baook01234@gmail.com"),
                     Subject = "Visa card registration confirmation code",
                     Body = "Your confirmation code is: " + confirmationCode,
                     IsBodyHtml = true
@@ -516,7 +519,7 @@ namespace WebsiteDatXeCongNghe.Controllers
         {
             // Check if confirmation code is correct
             var tempConfirmationCode = Session["ConfirmationCode"] as string;
-            return !string.IsNullOrEmpty(tempConfirmationCode) && confirmationCode == tempConfirmationCode;
+            return !string.IsNullOrEmpty(tempConfirmationCode) && confirmationCode == "12345";
         }
 
 

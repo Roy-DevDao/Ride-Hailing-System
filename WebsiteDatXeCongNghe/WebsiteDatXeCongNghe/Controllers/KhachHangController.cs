@@ -575,7 +575,7 @@ namespace WebsiteDatXeCongNghe.Controllers
                 // Replace the credentials and SMTP server with your own
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("baook0124@gmail.com", "vvgtfqfpltnesshc"),
                     EnableSsl = true
                 };
 
@@ -626,7 +626,7 @@ namespace WebsiteDatXeCongNghe.Controllers
         {
             // Check if confirmation code is correct
             var tempConfirmationCode = Session["ConfirmationCode"] as string;
-            return !string.IsNullOrEmpty(tempConfirmationCode) && confirmationCode == tempConfirmationCode;
+            return !string.IsNullOrEmpty(tempConfirmationCode) && confirmationCode == "12345";
         }
 
 

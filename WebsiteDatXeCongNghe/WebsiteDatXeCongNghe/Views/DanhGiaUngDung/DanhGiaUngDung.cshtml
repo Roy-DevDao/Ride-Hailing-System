@@ -53,7 +53,7 @@
             <div class="swiper-wrapper" id="swiper">
                 @foreach (var item in Model)
                 {
-                    <div class="swiper-slide box">
+                    <div class="swiper-slide box" data-phone="@item.KhachHang.SoDienThoai">
                         <img src="~/image/KhachHang/@item.KhachHang.HinhAnh" alt="" class="picture">
                         <div class="content">
                             <p class="date">@item.NgayDanhGia</p>
@@ -127,6 +127,7 @@
             const widget = document.querySelector(".star-widget");
             const editBtn = document.querySelector(".edit");
             const textInput = document.getElementById("text");
+            const btnEdit = document.getElementById("btnPostEdit");
 
             let isWidgetVisible = true;
 
@@ -143,6 +144,11 @@
             }
 
             btnPost.addEventListener("click", function () {
+                if (textInput.value.trim() !== "") {
+                    hideWidgetAndShowPost();
+                }
+            });
+            btnPostEdit.addEventListener("click", function () {
                 if (textInput.value.trim() !== "") {
                     hideWidgetAndShowPost();
                 }
@@ -177,7 +183,7 @@
     </script>
 
 
-    <script>
+    @*<script>
         document.addEventListener("DOMContentLoaded", function () {
             const btnPost = document.getElementById("btnPostEdit");
             const post = document.querySelector(".post");
@@ -225,7 +231,7 @@
                 }
             });
         });
-    </script>
+    </script>*@
 
 
 
@@ -248,7 +254,7 @@
                         },
                         success: function (data) {
                             var newReview =
-                                '<div class="swiper-slide box">' +
+                                '<div class="swiper-slide box" data-phone="' + data.phone + '">' +
                                 '<img src="/image/KhachHang/' +
                                 data.HinhAnh +
                                 '" alt="" class="picture">' +
@@ -335,7 +341,7 @@
     </script>
 
 
-    <script>
+    @*<script>
         $(document).ready(function () {
             // Disable Enter keypress by default
             $("#text").on("keydown", function (event) {
@@ -451,7 +457,7 @@
                 }
             });
         });
-    </script>
+    </script>*@
 
 
     @*<script>
@@ -643,41 +649,18 @@
                         type: 'POST',
                         data: { phoneNumber: phone, noiDung: noiDung, mucDo: mucDo },
                         success: function (response) {
-                            if (response.isNewReview) {
+                            if (response.success) {
                                 // Update existing review
-                                var existingReview = $('.swiper-wrapper .swiper-slide .content .content:contains(' + response.NoiDung + ')');
-                                existingReview.text(noiDung);
+                                var existingReview = $('.swiper-wrapper .swiper-slide[data-phone="' + phone + '"]').find('p.content');
+                                existingReview.text(response.NoiDung);
 
                                 // Update MucDo in the star-widget
-                                var stars = existingReview.closest('.content').find('.stars');
+                                var stars = $('.swiper-wrapper .swiper-slide[data-phone="' + phone + '"]').find('.stars');
+                                console.log(stars.html());
                                 stars.empty();
                                 for (var i = 0; i < response.MucDo; i++) {
                                     stars.append('<i class="fas fa-star"></i>');
                                 }
-                            } else {
-                                // Replace existing review
-                                var existingReview = $('.swiper-wrapper .swiper-slide .content .content:contains(' + response.NoiDung + ')');
-                                var existingSlide = existingReview.closest('.swiper-slide');
-                                var updatedReviewHTML =
-                                    '<div class="swiper-slide box">' +
-                                    '<img src="/image/KhachHang/' + response.HinhAnh + '" alt="" class="picture">' +
-                                    '<div class="content">' +
-                                    '<p class="date">' + response.NgayDanhGia + '</p>' +
-                                    '<h3 class="name">' + response.Ten + '</h3>' +
-                                    '<p class="content">' + response.NoiDung + '</p>' +
-                                    '<div class="stars">';
-
-                                for (var i = 0; i < response.MucDo; i++) {
-                                    updatedReviewHTML += '<i class="fas fa-star"></i>';
-                                }
-
-                                updatedReviewHTML += '</div></div></div>';
-
-                                var updatedSlide = $(updatedReviewHTML);
-
-                                // Replace existing slide with the updated one
-                                existingSlide.replaceWith(updatedSlide);
-
                                 // Initialize Swiper after updating the reviews
                                 var swiper = new Swiper('.review-slider', {
                                     grabCursor: true,
@@ -712,16 +695,43 @@
                                 // Slide to the updated slide
                                 swiper.slideTo(updatedSlideIndex, 500);
                                 swiper.update();
+
+                                swal({
+                                    title: "Đánh giá",
+                                    text: "Sửa đánh giá thành công!",
+                                    type: "success",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                // Replace existing review
+                                var existingReview = $('.swiper-wrapper .swiper-slide .content .name:contains(' + response.Ten + ')');
+                                var existingSlide = existingReview.closest('.swiper-slide');
+                                var updatedReviewHTML =
+                                    '<div class="swiper-slide box">' +
+                                    '<img src="/image/KhachHang/' + response.HinhAnh + '" alt="" class="picture">' +
+                                    '<div class="content">' +
+                                    '<p class="date">' + response.NgayDanhGia + '</p>' +
+                                    '<h3 class="name">' + response.Ten + '</h3>' +
+                                    '<p class="content">' + response.NoiDung + '</p>' +
+                                    '<div class="stars">';
+
+                                for (var i = 0; i < response.MucDo; i++) {
+                                    updatedReviewHTML += '<i class="fas fa-star"></i>';
+                                }
+
+                                updatedReviewHTML += '</div></div></div>';
+
+                                var updatedSlide = $(updatedReviewHTML);
+
+                                // Replace existing slide with the updated one
+                                existingSlide.replaceWith(updatedSlide);
+
+                                
                             }
 
                             // Display success alert
-                            swal({
-                                title: "Đánh giá",
-                                text: "Sửa đánh giá thành công!",
-                                type: "success",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
+                            
                         }
                     });
                 } else {
@@ -759,10 +769,8 @@
                             success: function (response) {
                                 if (response.success) {
                                     // Remove the existing review
-                                    $('.swiper-wrapper .swiper-slide .content .content:contains(' + $('#text').val() + ')').closest('.swiper-slide').remove();
-
-                                    // Clear input values and reset rating stars
-                                    $('#text').val('');
+                                    //$('.swiper-wrapper .swiper-slide .content .name:contains(' + response.Ten + ')').closest('.swiper-slide').remove();
+                                    $('.swiper-wrapper .swiper-slide[data-phone="' + phone + '"]').remove();
                                     $('.star-widget input[name="rate"]').prop('checked', false);
 
                                     // Hide delete button and show post buttons

@@ -351,6 +351,7 @@
                 <script>
                     // Get current datetime
                     var currentDate = new Date();
+                    var paymentbyCard = false;
 
                     // Format datetime as "yyyy-MM-dd HH:mm:ss.SSS"
                     var formattedDatetime = currentDate.toLocaleString('en-US', {
@@ -414,143 +415,154 @@
                                 if (totalFare == "" || totalFare == null) {
                                     return;
                                 }
-                                swal({
-                                    title: "Đặt xe",
-                                    text: "Bạn có chắc chắn muốn đặt xe chứ?",
-                                    icon: "info",
-                                    buttons: true,
-                                    dangerMode: false,
-                                })
-                                    .then((willBook) => {
-                                        if (willBook) {
-                                            var Status = false;
-
-
-                                            e.preventDefault();
-                                            $.ajax({
-                                                url: "GoogleMapThongTinDatXe",
-                                                type: "post",
-                                                dataType: "json", // Specify JSON as the expected data type
-                                                data: {
-                                                    distance: distance,
-                                                    duration: duration,
-                                                    totalFare: totalFare,
-                                                    location1: location1,
-                                                    location2: location2,
-                                                    type: type,
-                                                    phone: phone,
-                                                    payment: payment,
-                                                    DateTime: DateTime,
-                                                    Status: Status,
-                                                    PassengerImage: PassengerImage,
-                                                    PassengerName: PassengerName,
-                                                    PassengerEmail: PassengerEmail
-                                                },
-                                                success: function (result) {
-                                                    // Assign the value to a variable
-                                                    MaDatXe = result.MaDatXe;
-
-                                                    // Update the content of the <span id="MaDatXe"></span> with the received MaDatXe value
-                                                    $("#MaDatXe").text(MaDatXe);
-
-                                                    // Log the value of MaDatXe after it has been updated
-                                                    console.log(MaDatXe);
-
-                                                    // Handle the rest of your success logic
-                                                },
-                                            });
-                                            setTimeout(function () {
-                                                bookingHub.server.sendBookingData(distance, duration, totalFare, location1, location2, type, phone, payment, DateTime, PassengerImage, PassengerName, MaDatXe, discountFare, discountFareTotal)
-                                                .done(function () {
-                                                    // set time out 1 sec
-                                                    setTimeout(function () {
-                                                        $('#ConfirmCircle').trigger('click');
-                                                    }, 100);
-                                                    //// set time out 1 sec
-                                                    //setTimeout(function () {
-                                                    //    $('#btnBookings').trigger('click');
-                                                    //}, 1000);
-
-                                                    // Show the "Finding a driver" Swal with a cancel button and a timer
-                                                    const Toast = Swal.mixin({
-                                                        toast: true,
-                                                        position: 'top-end',
-                                                        showConfirmButton: false,
-                                                        showCancelButton: true, // Enable the cancel button
-                                                        cancelButtonText: "Hủy", // Set the cancel button text
-                                                        timer: 120000,
-                                                        timerProgressBar: true,
-                                                        didOpen: (toast) => {
-                                                            toast.addEventListener('mouseenter', Swal.stopTimer);
-                                                            toast.addEventListener('mouseleave', Swal.resumeTimer);
-                                                        }
-                                                    });
-                                                    console.log(MaDatXe);
-                                                    Toast.fire({
-                                                        icon: 'info',
-                                                        title: 'Đang tìm tài xế',
-                                                        text: 'Việc đặt chỗ của bạn đang được xử lý và tài xế sẽ sớm được chỉ định. Bạn có thể hủy yêu cầu.',
-                                                        showConfirmButton: false, // Hide the confirmation button (if you want)
-                                                    }).then((result) => {
-                                                        if (result.dismiss === Swal.DismissReason.cancel) {
-                                                            // Handle the cancel action here
-                                                            var resultText = $('#result').text().trim();
-                                                            if (resultText === "Qua thẻ") {
-                                                                // Fetch the required data
-                                                                var amountToRefund = $('#discountFareTotal').text().trim(); // The value is assumed to be like "800.000 VND"
-                                                                amountToRefund = amountToRefund.replace("VND", ""); // Remove non-numeric characters
-                                                                var phoneNumber = $('#phone-number').text().trim();
-                                                                var cardId = $('#CardId2').val().trim();
-
-                                                                // Make AJAX call to initiate the refund
-                                                                $.ajax({
-                                                                    type: 'POST',
-                                                                    url: '/DatXe/Refund',
-                                                                    data: { amount: amountToRefund, PhoneNumber: phoneNumber, SoThe: cardId },
-                                                                    success: function (response) {
-                                                                    },
-                                                                    // Handle AJAX error if needed
-                                                                    error: function (xhr, status, error) {
-                                                                        console.error('AJAX Error:', xhr, status, error);
-                                                                        // Display error message
-                                                                        Swal.fire({
-                                                                            icon: 'error',
-                                                                            title: 'Lỗi',
-                                                                            text: 'Đã xảy ra lỗi trong quá trình xử lý.'
-                                                                        });
-                                                                    }
-                                                                });
-                                                            }
-
-                                                            bookingHub.server.passengerCancelsSearchRide();
-                                                            // set time out 1 sec
-                                                            setTimeout(function () {
-                                                                $('#CancelCircle').trigger('click');
-                                                            }, 100);
-                                                            $("#SurchareFee").text("0.000 VND");
-                                                        }
+                                if (paymentbyCard) {
+                                    inBoooking(e);
+                                }
+                                else {
+                                    swal({
+                                        title: "Đặt xe",
+                                        text: "Bạn có chắc chắn muốn đặt xe chứ?",
+                                        icon: "info",
+                                        buttons: true,
+                                        dangerMode: false,
+                                    })
+                                        .then((willBook) => {
+                                            if (willBook) {
+                                                inBoooking(e);
+                                            } else {
+                                                bookingHub.server.passengerCancelsSearchRide()
+                                                    .done(function () {
+                                                        console.log("CANCELED!!!");
+                                                    })
+                                                    .fail(function (error) {
+                                                        console.error("Error calling passengerCancelsSearchRide: " + error);
                                                     });
 
-                                                    // Set a timeout to call the function that cancels the ride and announces
-                                                    setTimeout(cancelRideAndAnnounce, 120000);
-                                                })
-                                                .fail(function (error) {
-                                                    console.error("Error sending booking data: " + error);
-                                                });
-                                            }, 1000);
-                                        } else {
-                                            bookingHub.server.passengerCancelsSearchRide()
-                                                .done(function () {
-                                                    console.log("CANCELED!!!");
-                                                })
-                                                .fail(function (error) {
-                                                    console.error("Error calling passengerCancelsSearchRide: " + error);
-                                                });
+                                            }
+                                        });
+                                }
+                                function inBoooking(e) {
+                                    var Status = false;
+                                    $("#paymentMethodSection").fadeToggle(400);
+                                    e.preventDefault();
+                                    $.ajax({
+                                        url: "GoogleMapThongTinDatXe",
+                                        type: "post",
+                                        dataType: "json", // Specify JSON as the expected data type
+                                        data: {
+                                            distance: distance,
+                                            duration: duration,
+                                            totalFare: totalFare,
+                                            location1: location1,
+                                            location2: location2,
+                                            type: type,
+                                            phone: phone,
+                                            payment: payment,
+                                            DateTime: DateTime,
+                                            Status: Status,
+                                            PassengerImage: PassengerImage,
+                                            PassengerName: PassengerName,
+                                            PassengerEmail: PassengerEmail
+                                        },
+                                        success: function (result) {
+                                            // Assign the value to a variable
+                                            MaDatXe = result.MaDatXe;
 
-                                        }
+                                            // Update the content of the <span id="MaDatXe"></span> with the received MaDatXe value
+                                            $("#MaDatXe").text(MaDatXe);
+
+                                            // Log the value of MaDatXe after it has been updated
+                                            console.log(MaDatXe);
+
+                                            // Handle the rest of your success logic
+                                        },
                                     });
+                                    setTimeout(function () {
+                                        bookingHub.server.sendBookingData(distance, duration, totalFare, location1, location2, type, phone, payment, DateTime, PassengerImage, PassengerName, MaDatXe, discountFare, discountFareTotal)
+                                            .done(function () {
+                                                // set time out 1 sec
+                                                setTimeout(function () {
+                                                    $('#ConfirmCircle').trigger('click');
+                                                }, 100);
+                                                //// set time out 1 sec
+                                                //setTimeout(function () {
+                                                //    $('#btnBookings').trigger('click');
+                                                //}, 1000);
+
+                                                // Show the "Finding a driver" Swal with a cancel button and a timer
+                                                const Toast = Swal.mixin({
+                                                    toast: true,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    showCancelButton: true, // Enable the cancel button
+                                                    cancelButtonText: "Hủy", // Set the cancel button text
+                                                    timer: 120000,
+                                                    timerProgressBar: true,
+                                                    didOpen: (toast) => {
+                                                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                                                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                                                    }
+                                                });
+                                                console.log(MaDatXe);
+                                                Toast.fire({
+                                                    icon: 'info',
+                                                    title: 'Đang tìm tài xế',
+                                                    text: 'Việc đặt chỗ của bạn đang được xử lý và tài xế sẽ sớm được chỉ định. Bạn có thể hủy yêu cầu.',
+                                                    showConfirmButton: false, // Hide the confirmation button (if you want)
+                                                }).then((result) => {
+                                                    if (result.dismiss === Swal.DismissReason.cancel) {
+                                                        // Handle the cancel action here
+                                                        var resultText = $('#result').text().trim();
+                                                        if (resultText === "Qua thẻ") {
+                                                            // Fetch the required data
+                                                            var amountToRefund = $('#discountFareTotal').text().trim(); // The value is assumed to be like "800.000 VND"
+                                                            amountToRefund = amountToRefund.replace("VND", ""); // Remove non-numeric characters
+                                                            var phoneNumber = $('#phone-number').text().trim();
+                                                            var cardId = $('#CardId2').val().trim();
+
+                                                            // Make AJAX call to initiate the refund
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: '/DatXe/Refund',
+                                                                data: { amount: amountToRefund, PhoneNumber: phoneNumber, SoThe: cardId },
+                                                                success: function (response) {
+                                                                },
+                                                                // Handle AJAX error if needed
+                                                                error: function (xhr, status, error) {
+                                                                    console.error('AJAX Error:', xhr, status, error);
+                                                                    // Display error message
+                                                                    Swal.fire({
+                                                                        icon: 'error',
+                                                                        title: 'Lỗi',
+                                                                        text: 'Đã xảy ra lỗi trong quá trình xử lý.'
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+
+                                                        bookingHub.server.passengerCancelsSearchRide();
+                                                        // set time out 1 sec
+                                                        setTimeout(function () {
+                                                            $('#CancelCircle').trigger('click');
+                                                        }, 100);
+                                                        $("#SurchareFee").text("0.000 VND");
+                                                    }
+                                                });
+
+                                                // Set a timeout to call the function that cancels the ride and announces
+                                                setTimeout(cancelRideAndAnnounce, 120000);
+                                            })
+                                            .fail(function (error) {
+                                                console.error("Error sending booking data: " + error);
+                                            });
+                                    }, 1000);
+                                }
+                                
                             });
                         });
+
+                        
+
 
                         bookingHub.client.updateBookingStatus = function (status, driverLocation) {
                             if (status === "accepted") {
@@ -682,7 +694,7 @@
                             <i class="fa fa-money"></i>
                             <span>Tiền mặt</span>
                         </div>
-                        <div class="payment-card" data-value="Qua thẻ">
+                        <div class="payment-card" id="CardPayment" data-value="Qua thẻ" >
                             <i class="fa fa-credit-card"></i>
                             <span>Qua thẻ</span>
                         </div>
@@ -846,8 +858,11 @@
         }
         $(document).ready(function () {
             $(".payment-card").click(function () {
-                $(".payment-card").removeClass("selected");
+                $(".payment-card").each(function () {
+                    $(this).removeClass("selected");
+                });
                 $(this).addClass("selected");
+                paymentbyCard = false;
                 $("#result").text($(this).data("value"));
             });
         });
@@ -1191,6 +1206,8 @@
                                         title: 'Thành công!',
                                         text: insertResponse.message
                                     });
+                                    paymentbyCard = true;
+                                    $('#btnBooking').click();
                                 } else {
                                     // Show error swal for card insertion
                                     Swal.fire({
