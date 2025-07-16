@@ -637,9 +637,9 @@ namespace WebsiteDatXeCongNghe.Controllers
             try
             {
                 // Replace the credentials and SMTP server with your own
-                var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                var smtpClient = new SmtpClient("smtp.gmail.com", 465)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                   Credentials = new NetworkCredential("baook01234@gmail.com", "zavspryzezkupzcr"),
                     EnableSsl = true
                 };
 
