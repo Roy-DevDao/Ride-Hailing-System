@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -249,54 +249,31 @@ namespace WebsiteDatXeCongNghe.Controllers
                 return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-        //[HttpPost]
-        //public ActionResult UpdateTrangThaiHoatDong(string driverPhone, bool isChecked)
-        //{
-        //    try
-        //    {
-        //        // Assuming db is your DbContext
-        //        var trangThaiHoatDong = db.TrangThaiHoatDongs.FirstOrDefault(t => t.SoDienThoai == driverPhone);
-
-        //        if (trangThaiHoatDong != null)
-        //        {
-        //            // Update the TrangThai column based on the isChecked parameter
-        //            trangThaiHoatDong.TrangThai = isChecked;
-
-        //            // Save changes to the database
-        //            db.SaveChanges();
-
-        //            return Json(new { success = true, message = "TrangThaiHoatDong updated successfully" }, JsonRequestBehavior.AllowGet);
-        //        }
-
-        //        return Json(new { success = false, message = "TrangThaiHoatDong not found" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { success = false, message = $"Error: {ex.Message}" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-
         [HttpPost]
-        public JsonResult UpdateTrangThaiHoatDong(string driverPhone, bool isChecked)
+        public ActionResult UpdateTrangThaiHoatDong(string driverPhone, bool isChecked)
         {
-            var trangThai = db.TrangThaiHoatDongs.FirstOrDefault(t => t.SoDienThoai == driverPhone);
-            if (trangThai == null)
+            try
             {
-                // Nếu chưa có, tạo mới
-                trangThai = new TrangThaiHoatDong
+                // Assuming db is your DbContext
+                var trangThaiHoatDong = db.TrangThaiHoatDongs.FirstOrDefault(t => t.SoDienThoai == driverPhone);
+
+                if (trangThaiHoatDong != null)
                 {
-                    SoDienThoai = driverPhone,
-                    TrangThai = isChecked
-                };
-                db.TrangThaiHoatDongs.Add(trangThai);
+                    // Update the TrangThai column based on the isChecked parameter
+                    trangThaiHoatDong.TrangThai = isChecked;
+
+                    // Save changes to the database
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "TrangThaiHoatDong updated successfully" }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new { success = false, message = "TrangThaiHoatDong not found" }, JsonRequestBehavior.AllowGet);
             }
-            else
+            catch (Exception ex)
             {
-                // Nếu đã có, cập nhật
-                trangThai.TrangThai = isChecked;
+                return Json(new { success = false, message = $"Error: {ex.Message}" }, JsonRequestBehavior.AllowGet);
             }
-            db.SaveChanges();
-            return Json(new { success = true, message = "Cập nhật trạng thái thành công" });
         }
 
 
@@ -1632,9 +1609,9 @@ namespace WebsiteDatXeCongNghe.Controllers
             try
             {
                 // Replace the credentials and SMTP server with your own
-                var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                var smtpClient = new SmtpClient("smtp.gmail.com", 465)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("baook01234@gmail.com", "zavspryzezkupzcr"),
                     EnableSsl = true
                 };
 
