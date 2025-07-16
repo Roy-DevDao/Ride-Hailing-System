@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -182,7 +182,7 @@ namespace WebsiteDatXeCongNghe.Controllers
         //}
 
         [HttpPost]
-        public ActionResult DanhGiaTaiXe(string PassengerPhone, string DriverPhone, int value_rate, string content, DateTime date_rate)
+        public ActionResult DanhGiaTaiXe(string PassengerPhone, string DriverPhone, int value_rate, string content)
         {
             try
             {
@@ -463,9 +463,9 @@ namespace WebsiteDatXeCongNghe.Controllers
             try
             {
                 // Replace the credentials and SMTP server with your own
-                var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                var smtpClient = new SmtpClient("smtp.gmail.com", 465)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("baook01234@gmail.com", "zavspryzezkupzcr"),
                     EnableSsl = true
                 };
 
