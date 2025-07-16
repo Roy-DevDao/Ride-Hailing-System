@@ -30,31 +30,34 @@ namespace WebsiteDatXeCongNghe.Controllers
             return View();
         }
         [HttpPost]
+//Begin adjust : Sua add image
         public ActionResult ThemMoiKH(KhachHang kh, HttpPostedFileBase HinhAnhUpload)
-        {
-            DichVuDatXeWebsite3Entities db = new DichVuDatXeWebsite3Entities();
-            //Add new
-            db.KhachHangs.Add(kh);
-            //Save
-            db.SaveChanges();
-            if (HinhAnhUpload != null && HinhAnhUpload.ContentLength > 0)
-            {
-                int id = int.Parse(db.KhachHangs.ToList().Last().MaKH.ToString());
-                string _FileName = "";
-                int index = HinhAnhUpload.FileName.IndexOf('.');
-                _FileName = "kh" + id.ToString() + "." + HinhAnhUpload.FileName.Substring(index + 1);
-                String _path = Path.Combine(Server.MapPath("~/image/KhachHang"), _FileName);
-                HinhAnhUpload.SaveAs(_path);
+{
+    DichVuDatXeWebsite3Entities db = new DichVuDatXeWebsite3Entities();
+    //Add new
+    db.KhachHangs.Add(kh);
+    //Save
+    db.SaveChanges();
+    if (HinhAnhUpload != null && HinhAnhUpload.ContentLength > 0)
+    {
+        int id = int.Parse(db.KhachHangs.ToList().Last().MaKH.ToString());
+        string _FileName = Path.GetFileName(HinhAnhUpload.FileName);
+     //   int index = HinhAnhUpload.FileName.IndexOf('.');
+      //  _FileName = "kh" + id.ToString() + "." + HinhAnhUpload.FileName.Substring(index + 1);
+        String _path = Path.Combine(Server.MapPath("~/image/KhachHang"), _FileName);
+        HinhAnhUpload.SaveAs(_path);
+        // Update the customer's image field
 
-                KhachHang k = db.KhachHangs.FirstOrDefault(x => x.MaKH == id);
-                //k.HinhAnh = _FileName;
-                k.HinhAnh = "pic1.png";
-                db.SaveChanges();
-            }
-            ViewBag.Message = kh.Ten + kh.SoDienThoai + " Đăng ký thành công ";
-            return RedirectToAction("DangNhap","TaiKhoan");
 
-        }
+        kh.HinhAnh = _FileName;
+        db.Entry(kh).State = System.Data.Entity.EntityState.Modified;
+        db.SaveChanges();
+    }
+    ViewBag.Message = kh.Ten + kh.SoDienThoai + " Đăng ký thành công ";
+    return RedirectToAction("DangNhap","TaiKhoan");
+
+}
+// end adjust
         public ActionResult SuaDoiKH(int? id)
         {
             if (id == null)
