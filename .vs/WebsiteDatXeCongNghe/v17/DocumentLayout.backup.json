@@ -1,50 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\",
+  "WorkspaceRootPath": "E:\\FPT software document\\Ki 7\\Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\views\\taixe\\thongtintaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\thongtintaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|e:\\fpt software document\\ki 7\\project\\websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\controllers\\datxecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\datxecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\views\\taixe\\thongtincanhantaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\thongtincanhantaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\controllers\\quanlycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\quanlycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\views\\taikhoan\\dangnhap.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taikhoan\\dangnhap.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\danhgiaungdungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\danhgiaungdungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\views\\taikhoan\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taikhoan\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\danhgiacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\danhgiacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\khuyenmaicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\khuyenmaicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\datxe\\khachduocdon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\datxe\\khachduocdon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\websitedatxecongnghe\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\taixedonkhach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\taixedonkhach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\taikhoannganhangtx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\taikhoannganhangtx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\trakhach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\trakhach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,8 +53,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 148,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,137 +70,138 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TaiXeController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "ViewState": "AgIAAMoFAAAAAAAAAAAUwNwFAAAdAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TaiKhoanController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAkwAwAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:25:13.841Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-15T12:46:55.493Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ThongTinTaiXe.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
-              "ViewState": "AgIAAGEBAAAAAAAAAAAQwI0BAAA2AAAAAAAAAA==",
+              "Title": "ViTienTaiXe.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "ViewState": "AgIAAOABAAAAAAAAAAAAAOwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-02T09:24:00.315Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ThongTinCaNhanTaiXe.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinCaNhanTaiXe.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinCaNhanTaiXe.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinCaNhanTaiXe.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinCaNhanTaiXe.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-02T09:20:32.009Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DatXeController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\DatXeController.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\DatXeController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\DatXeController.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\DatXeController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwMgBAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T07:58:33.696Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiKhoan\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiKhoan\\Index.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiKhoan\\Index.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiKhoan\\Index.cshtml",
-              "ViewState": "AgIAAJoAAAAAAAAAAMBtwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T07:52:38.373Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DangNhap.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiKhoan\\DangNhap.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiKhoan\\DangNhap.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\TaiKhoan\\DangNhap.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiKhoan\\DangNhap.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAIBZwGEAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T07:52:36.969Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T07:52:27.649Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RouteConfig.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\App_Start\\RouteConfig.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\App_Start\\RouteConfig.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\App_Start\\RouteConfig.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\App_Start\\RouteConfig.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T06:09:28.573Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Web.config",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Web.config",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Web.config",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Web.config",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Web.config",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAAAMkAAAAuAQAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-06-04T05:53:08.879Z",
+              "WhenOpened": "2025-07-15T09:03:38.072Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TaiKhoanController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
-              "ViewState": "AgIAAAoCAAAAAAAAAAAlwEoAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TaiXeController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "ViewState": "AgIAAEwEAAAAAAAAAAAuwFwEAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T05:49:22.475Z"
+              "WhenOpened": "2025-07-15T09:03:49.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChiTietThanhToanTX.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "ViewState": "AgIAAF8BAAAAAAAAAAAAAFsBAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T13:04:44.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DanhGiaUngDungController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
+              "ViewState": "AgIAANoAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T12:46:34.991Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "QuanLyController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\QuanLyController.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\QuanLyController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE7\\TaxiBookingApp\\WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe\\Controllers\\QuanLyController.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\QuanLyController.cs",
-              "ViewState": "AgIAAAkBAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Title": "DanhGiaController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T15:21:25.19Z"
+              "WhenOpened": "2025-07-15T12:46:33.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "KhuyenMaiController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T12:46:26.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "KhachDuocDon.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
+              "ViewState": "AgIAALoCAAAAAAAAAAAAAAEDAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T12:28:26.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TaiXeDonKhach.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
+              "ViewState": "AgIAAPcDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T12:28:00.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TaiKhoanNganHangTX.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAmwLAAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T11:34:17.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TraKhach.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T09:16:56.839Z"
             }
           ]
         },
@@ -208,10 +209,6 @@
           "DockedWidth": 148,
           "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"

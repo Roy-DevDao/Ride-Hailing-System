@@ -13,6 +13,7 @@ using WebsiteDatXeCongNghe.ViewModel.MultipleData;
 using Nexmo.Api;
 using Twilio.Types;
 using Client = Nexmo.Api.Client;
+using System.Globalization;
 
 namespace WebsiteDatXeCongNghe.Controllers
 {
@@ -955,7 +956,6 @@ namespace WebsiteDatXeCongNghe.Controllers
             }
         }
 
-        
 
 
         [HttpPost]
@@ -963,133 +963,107 @@ namespace WebsiteDatXeCongNghe.Controllers
         {
             try
             {
-                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
                 var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                // Validate the amount and input parameters if needed
-                if (amount < 10.000m)
-                {
-                    return Json(new { success = false, message = "Số tiền phải lớn hơn hoặc bằng 10.000 VNĐ." });
-                }
-                // Check if the amount is greater than the balance in TaiKhoanNganHangTaiXe
-                if (amount > taiKhoan.SoDu)
-                {
-                    return Json(new { success = false, message = "Không đủ tiền trong số dư thẻ." });
-                }
 
-                // Check if the amount is greater than the balance in TheVisa
+                /*--- Quy đổi số dư DB sang đồng ---*/
+                decimal soDuTheDong = taiKhoan.SoDu * 1000m;      // 2 500  → 2 500 000
+                decimal soDuVisaDong = (decimal)(visaAccount.SoDu * 1000m);
+                // === 1. Kiểm tra tham số ===
+                if (amount < 10000m)                           // 10 000 VNĐ
+                    return Json(new { success = false, message = "Số tiền phải ≥ 10 000 VNĐ." });
 
-                if (visaAccount == null || amount > visaAccount.SoDu)
-                {
-                    return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
-                }
-
-                // Check if the TaiXe exists
-
+                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
                 if (taiXe == null)
-                {
                     return Json(new { success = false, message = "Driver not found." });
-                }
 
-                // Check if the TaiKhoanNganHangTaiXe exists
-                
                 if (taiKhoan == null)
-                {
                     return Json(new { success = false, message = "Bank account not found." });
-                }
 
+                if (visaAccount == null)
+                    return Json(new { success = false, message = "Visa account not found." });
+
+                // === 2. Kiểm tra số dư ===
+                if (amount > soDuTheDong)
+                    return Json(new { success = false, message = "Không đủ tiền trong số dư thẻ.",
+                        debugAmount = amount,          // số tiền client gửi (đồng)
+                        debugSoDu = taiKhoan.SoDu
+                    });
+
+                if (amount > soDuVisaDong)
+                    return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
+
+                // === 3. Gửi OTP ===
                 string confirmationCode = GenerateConfirmationCode();
+                bool sentSuccessfully = PhoneNumber.Contains("@")
+                                        ? SendConfirmationCodeByEmail(PhoneNumber, confirmationCode)
+                                        : SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
 
-                // Check if phoneNumber contains "@"
-                if (PhoneNumber.Contains("@"))
-                {
-                    bool sentSuccessfully = SendConfirmationCodeByEmail(PhoneNumber, confirmationCode);
+                if (!sentSuccessfully)
+                    return Json(new { success = false, message = "Failed to send confirmation code." });
 
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via email" });
-                    }
-                }
-                else
-                {
-                    bool sentSuccessfully = SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via SMS" });
-                    }
-                }
-
-                // Store the confirmation code in Session
                 Session["ConfirmationCode"] = confirmationCode;
 
-                return Json(new { success = true, message = "Gửi mã OTP!", confirmationCode });
+                return Json(new { success = true, message = "Gửi mã OTP!" });
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
                 return Json(new { success = false, message = $"Error: {ex.Message}" });
             }
         }
-
 
         [HttpPost]
         public ActionResult NapTien2(decimal amount, string PhoneNumber, string SoThe)
         {
             try
             {
-                // Check if the TaiXe exists
                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-                
-                // Check if the TaiKhoanNganHangTaiXe exists
-                var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-                
-                // Check if the amount is greater than the balance in TheVisa
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                
-                // Update the wallet balance in the TaiXe table
-                taiXe.ViTien += amount;
+                var tkBank = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
+                var tkVisa = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
 
-                // Format the wallet balance with three decimal places
-                var formattedWalletBalance = taiXe.ViTien.ToString("F3");
+                if (taiXe == null || tkBank == null || tkVisa == null)
+                    return Json(new { success = false, message = "Tài khoản không tồn tại." });
 
+                /* --- Quy đổi SoDu DB sang ĐỒNG để kiểm tra --- */
+                decimal soDuTheDong = tkBank.SoDu * 1000m;
+                decimal soDuVisaDong = (decimal)(tkVisa.SoDu * 1000m);
 
-                // Deduct the amount from the SoDu column in the TaiKhoanNganHangTaiXe table
-                taiKhoan.SoDu -= amount;
-                var formattedBalanceCard = taiKhoan.SoDu.ToString("F3");
-                // Deduct the amount from the SoDu column in the TheVisa table
-                visaAccount.SoDu -= amount;
+                if (amount > soDuTheDong || amount > soDuVisaDong)
+                    return Json(new { success = false, message = "Không đủ tiền (sau OTP)." });
 
-                // Log the deposit transaction into LichSuGiaoDich table
-                var transaction = new LichSuGiaoDich
+                /* --- TRỪ TIỀN --- */
+                taiXe.ViTien += amount/1000m;           // Ví = đồng
+
+                soDuTheDong -= amount;
+                soDuVisaDong -= amount;
+
+                tkBank.SoDu = soDuTheDong / 1000m;   // ghi lại về NGHÌN
+                tkVisa.SoDu = soDuVisaDong / 1000m;
+
+                db.LichSuGiaoDiches.Add(new LichSuGiaoDich
                 {
                     SoDienThoai = PhoneNumber,
                     NgayGiaoDich = DateTime.Now,
-                    LoaiGiaoDich = "Deposit", // Assuming "Deposit" is the transaction type for deposits
+                    LoaiGiaoDich = "Deposit",
                     SoTien = amount
-                };
+                });
 
-                db.LichSuGiaoDiches.Add(transaction);
-
-                var formattedBalanceHistory = transaction.SoTien.ToString("F3");
-
-                // Save changes to the database
                 db.SaveChanges();
 
-                // Return the updated data in the response
+                var viCulture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
                 return Json(new
                 {
                     success = true,
-                    message = "Nạp thành công vào ví với số tiền: ",
-                    walletDriver = formattedWalletBalance,
-                    balanceCard = formattedBalanceCard,
-                    balanceHistory = formattedBalanceHistory
+                    message = "Nạp thành công!",
+                    walletDriver = taiXe.ViTien.ToString("N0", viCulture),               // đồng
+                    balanceCard = (tkBank.SoDu * 1000m).ToString("N0", viCulture),      // đồng
+                    balanceHistory = amount.ToString("N0", viCulture)                      // đồng
                 });
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
+                return Json(new { success = false, message = ex.ToString() });
             }
         }
 
@@ -1100,134 +1074,77 @@ namespace WebsiteDatXeCongNghe.Controllers
             {
                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                // Validate the amount and input parameters if needed
-                if (amount < 10.000m)
-                {
-                    return Json(new { success = false, message = "Số tiền phải lớn hơn hoặc bằng 10.000 VNĐ." });
-                }
-                // Check if the amount is greater than the wallet
+
+                if (amount < 10000m)
+                    return Json(new { success = false, message = "Số tiền phải ≥ 10.000 VNĐ." });
+
+                if (taiXe == null || taiKhoan == null)
+                    return Json(new { success = false, message = "Không tìm thấy tài khoản." });
+
                 if (amount > taiXe.ViTien)
-                {
                     return Json(new { success = false, message = "Không đủ tiền trong ví." });
-                }
 
-                //// Check if the amount is greater than the balance in TheVisa
-
-                //if (visaAccount == null || amount > visaAccount.SoDu)
-                //{
-                //    return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
-                //}
-
-                // Check if the TaiXe exists
-
-                if (taiXe == null)
-                {
-                    return Json(new { success = false, message = "Driver not found." });
-                }
-
-                // Check if the TaiKhoanNganHangTaiXe exists
-
-                if (taiKhoan == null)
-                {
-                    return Json(new { success = false, message = "Bank account not found." });
-                }
-
+                // Gửi mã OTP
                 string confirmationCode = GenerateConfirmationCode();
+                bool sent = PhoneNumber.Contains("@")
+                    ? SendConfirmationCodeByEmail(PhoneNumber, confirmationCode)
+                    : SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
 
-                // Check if phoneNumber contains "@"
-                if (PhoneNumber.Contains("@"))
-                {
-                    bool sentSuccessfully = SendConfirmationCodeByEmail(PhoneNumber, confirmationCode);
+                if (!sent)
+                    return Json(new { success = false, message = "Gửi OTP thất bại." });
 
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via email" });
-                    }
-                }
-                else
-                {
-                    bool sentSuccessfully = SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via SMS" });
-                    }
-                }
-
-                // Store the confirmation code in Session
                 Session["ConfirmationCode"] = confirmationCode;
-
-                return Json(new { success = true, message = "Gửi mã OTP!", confirmationCode });
+                return Json(new { success = true, message = "Gửi mã OTP!" });
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
             }
         }
-
 
         [HttpPost]
         public ActionResult RutTien2(decimal amount, string PhoneNumber, string SoThe)
         {
             try
             {
-                // Check if the TaiXe exists
                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-
-                // Check if the TaiKhoanNganHangTaiXe exists
                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-
-                // Check if the amount is greater than the balance in TheVisa
                 var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
 
-                // Update the wallet balance in the TaiXe table
-                taiXe.ViTien -= amount;
+                if (taiXe == null || taiKhoan == null || visaAccount == null)
+                    return Json(new { success = false, message = "Tài khoản không tồn tại." });
 
-                // Format the wallet balance with three decimal places
-                var formattedWalletBalance = taiXe.ViTien.ToString("F3");
+                taiXe.ViTien -= amount/1000m;
+                taiKhoan.SoDu += amount / 1000m;
+                visaAccount.SoDu += amount / 1000m;
 
-
-                // Deduct the amount from the SoDu column in the TaiKhoanNganHangTaiXe table
-                taiKhoan.SoDu += amount;
-                var formattedBalanceCard = taiKhoan.SoDu.ToString("F3");
-                // Deduct the amount from the SoDu column in the TheVisa table
-                visaAccount.SoDu += amount;
-
-                // Log the withdrawal transaction into LichSuGiaoDich table
                 var transaction = new LichSuGiaoDich
                 {
                     SoDienThoai = PhoneNumber,
                     NgayGiaoDich = DateTime.Now,
-                    LoaiGiaoDich = "Withdrawal", // Assuming "Withdrawal" is the transaction type for withdrawal
+                    LoaiGiaoDich = "Withdrawal",
                     SoTien = amount
                 };
 
                 db.LichSuGiaoDiches.Add(transaction);
-
-                var formattedBalanceHistory = transaction.SoTien.ToString("F3");
-
-                // Save changes to the database
                 db.SaveChanges();
 
-                // Return the updated data in the response
+                var viCulture = CultureInfo.GetCultureInfo("vi-VN");
+
                 return Json(new
                 {
                     success = true,
-                    message = "Rút thành công từ ví với số tiền: ",
-                    walletDriver = formattedWalletBalance,
-                    balanceCard = formattedBalanceCard,
-                    balanceHistory = formattedBalanceHistory
+                    message = "Đã rút thành công số tiền:",
+                    walletDriver = taiXe.ViTien.ToString("N0", viCulture),
+                    balanceCard = (taiKhoan.SoDu * 1000m).ToString("N0", viCulture),
+                    balanceHistory = amount.ToString("N0", viCulture)
                 });
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
             }
         }
-
 
 
 
@@ -1621,7 +1538,7 @@ namespace WebsiteDatXeCongNghe.Controllers
                 // Replace the credentials and SMTP server with your own
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("tnthien2503@gmail.com", "qphnwxkbomtdjplb"),
                     EnableSsl = true
                 };
 

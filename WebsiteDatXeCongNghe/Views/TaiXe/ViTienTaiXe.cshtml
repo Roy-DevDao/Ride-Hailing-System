@@ -517,9 +517,12 @@
             url: '@Url.Action("GetViTien", "TaiXe")',
             success: function (response) {
                 // Format the ViTien value with dots as thousand separators
-                var formattedResponse = Number(response.replace(/\D/g, '')).toLocaleString('vi-VN');
-                // Update the HTML element with the formatted ViTien value
-                $('#WalletDriver').text(formattedResponse + " VND");
+                let cleaned = response.replace(/\D/g, '');
+                let viTien = Number(cleaned);
+
+                // Format lại thành VND kiểu Việt
+                let formatted = viTien.toLocaleString('vi-VN');
+                $('#WalletDriver').text(formatted + ' VND');
 
                 $.ajax({
             type: 'GET',
@@ -553,13 +556,8 @@
             data: { phoneNumber: phoneNumber },
             success: function (response) {
                 if (response.success) {
-                    var formattedtotalWithdrawalAmount = Number(response.totalWithdrawalAmount).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-
-                    // Replace commas with dots
-                    formattedtotalWithdrawalAmount = formattedtotalWithdrawalAmount.replace(/,/g, '.');
-                    // Update the content of #TotalWithdrawalAmount
-                    $('#TotalWithdrawalAmount').text(formattedtotalWithdrawalAmount + " VND");
-
+                    var formatted = Number(response.totalWithdrawalAmount).toLocaleString('vi-VN');
+                    $('#TotalWithdrawalAmount').text(formatted + " VND");
                     // Optionally, update other UI elements or perform additional actions
                 } else {
                     // Handle failure, show an error message
@@ -585,14 +583,8 @@
             data: { phoneNumber: phoneNumber },
             success: function (response) {
                 if (response.success) {
-                    var formattedtotalDepositAmount = Number(response.totalDepositAmount).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-
-                    // Replace commas with dots
-                    formattedtotalDepositAmount = formattedtotalDepositAmount.replace(/,/g, '.');
-                    // Update the content of #TotalWithdrawalAmount
-                    $('#TotalDepositAmount').text(formattedtotalDepositAmount + " VND");
-
-                    // Optionally, update other UI elements or perform additional actions
+                    var formatted = Number(response.totalDepositAmount).toLocaleString('vi-VN');
+                    $('#TotalDepositAmount').text(formatted + " VND");
                 } else {
                     // Handle failure, show an error message
                     console.error('Failed to get total deposit amount:', response.message);
@@ -788,49 +780,42 @@
 
             // Click event for the "Nạp tiền" button
             $("#MoneyDepositBtn").click(function () {
-                // Fetch the data from #BalanceCard and #WalletDriver
-                var balanceCard = $('#BalanceCard').text().trim();
-                var IDbalanceCard = $('#IdCard').text().trim();
-                var amount = $('#EnterAmountDeposit').val().trim();
-                var phoneNumber = $('#PhoneNumber').text().trim(); // Get the phone number from the hidden element
 
-                // Validate the amount if needed
-                // Pass the data to #EnterAmountPass
-                $('#EnterAmountPass').text(amount);
+                /* --- Lấy dữ liệu từ DOM --- */
+                const rawAmount = $('#EnterAmountDeposit').val().trim();        // "200.000" hoặc "200,000"
+                const amountClean = rawAmount.replace(/\D/g, '');                 // "200000"
+                const phoneNumber = $('#PhoneNumber').text().trim();
+                const soThe = $('#IdCard').text().trim();
 
-                // Make AJAX call to submit the form
+                // Hiển thị lại cho user (nếu cần)
+                $('#EnterAmountPass').text(rawAmount);
+
+                /* --- Gửi Ajax --- */
                 $.ajax({
                     type: 'POST',
                     url: '/TaiXe/NapTien',
-                    data: { amount: amount, PhoneNumber: phoneNumber, SoThe: IDbalanceCard },
-                    success: function (response) {
-
-                        if (response.success) {
-                            //// Show success swal
-                            //Swal.fire({
-                            //    icon: 'success',
-                            //    title: 'Thành công!',
-                            //    text: 'Nạp tiền thành công!'
-                            //});
-
-                            // Show OTP form after successful deposit
+                    data: {
+                        amount: amountClean,        // Chi chua so
+                        PhoneNumber: phoneNumber,
+                        SoThe: soThe
+                    },
+                    success: function (res) {
+                        console.log("DEBUG => amount gửi:", res.debugAmount);
+                        console.log("DEBUG => SoDu DB  :", res.debugSoDu);
+                        console.log("NapTien RESPONSE:", res);
+                        if (res.success) {
                             closeDepositForm();
                             showOTPForm();
-
                         } else {
-                            // Show error swal
-                            alert(response.message);
+                            alert(res.message);
                         }
                     },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX Error:', xhr, status, error);
+                    error: function (xhr, status, err) {
+                        console.error("NapTien AJAX error:", err);
                         alert('Không đủ tiền trong số dư thẻ.');
                     }
-
                 });
-
             });
-
         });
     </script>
 
@@ -876,47 +861,29 @@
 
             // Click event for the "Rút tiền" button
             $("#MoneyWithdrawalBtn").click(function () {
-                // Fetch the data from #BalanceCard and #WalletDriver
-                var balanceCard = $('#BalanceCard').text().trim();
-                var IDbalanceCard = $('#IdCard').text().trim();
-                var amount = $('#EnterAmountWithdrawal').val().trim();
-                var phoneNumber = $('#PhoneNumber').text().trim(); // Get the phone number from the hidden element
+                const rawAmount = $('#EnterAmountWithdrawal').val().trim();
+                const amountClean = rawAmount.replace(/\D/g, '');
+                const phoneNumber = $('#PhoneNumber').text().trim();
+                const soThe = $('#IdCard').text().trim();
 
-                // Validate the amount if needed
-                // Pass the data to #EnterAmountPass
-                $('#EnterAmountPass2').text(amount);
+                $('#EnterAmountPass2').text(rawAmount); // để hiển thị lại cho OTP
 
-                // Make AJAX call to submit the form
                 $.ajax({
                     type: 'POST',
                     url: '/TaiXe/RutTien',
-                    data: { amount: amount, PhoneNumber: phoneNumber, SoThe: IDbalanceCard },
+                    data: { amount: amountClean, PhoneNumber: phoneNumber, SoThe: soThe },
                     success: function (response) {
-
                         if (response.success) {
-                            //// Show success swal
-                            //Swal.fire({
-                            //    icon: 'success',
-                            //    title: 'Thành công!',
-                            //    text: 'Nạp tiền thành công!'
-                            //});
-
-                            // Show OTP form after successful deposit
                             closeWithdrawalForm();
                             showOTPForm2();
-
                         } else {
-                            // Show error swal
-                            alert(response.message);
+                            Swal.fire({ icon: 'error', title: 'Lỗi!', text: response.message });
                         }
                     },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX Error:', xhr, status, error);
-                        alert('Không đủ tiền trong ví.');
+                    error: function () {
+                        Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Đã xảy ra lỗi khi gửi yêu cầu rút tiền.' });
                     }
-
                 });
-
             });
 
         });
@@ -1077,8 +1044,10 @@
                 // Fetch the data from #BalanceCard and #WalletDriver
                 var balanceCard = $('#BalanceCard').text().trim();
                 var IDbalanceCard = $('#IdCard').text().trim();
-                var amount = $('#EnterAmountPass').text().trim();
+                var amount = $('#EnterAmountPass').text()?.trim();
                 var phoneNumber = $('#PhoneNumber').text().trim(); // Get the phone number from the hidden element
+                amount = amount.replace(/\./g, '');
+                console.log("🟢 OTP amount from #EnterAmountPass:", amount);
                 $.ajax({
                     type: 'POST',
                     url: '/TaiXe/EnterConfirmationCode',
@@ -1105,17 +1074,18 @@
                                 url: '/TaiXe/NapTien2',
                                 data: { amount: amount, PhoneNumber: phoneNumber, SoThe: IDbalanceCard },
                                 success: function (insertResponse) {
+                                    console.log("🟢 RESPONSE NapTien2:", insertResponse);
                                     if (insertResponse.success) {
+                                        // Replace commas with dots
+                                        let walletRaw = insertResponse.walletDriver.replace(/\./g, '').replace(/,/g, '');
+                                        let cardRaw = insertResponse.balanceCard.replace(/\./g, '').replace(/,/g, '');
+                                        let historyRaw = insertResponse.balanceHistory.replace(/\./g, '').replace(/,/g, '');
+
 
                                         // Format the numbers with thousand separators
-                                        var formattedWalletDriver = Number(insertResponse.walletDriver).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-                                        var formattedBalanceCard = Number(insertResponse.balanceCard).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-                                        var formattedBalanceHistory = Number(insertResponse.balanceHistory).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-
-                                        // Replace commas with dots
-                                        formattedWalletDriver = formattedWalletDriver.replace(/,/g, '.');
-                                        formattedBalanceCard = formattedBalanceCard.replace(/,/g, '.');
-                                        formattedBalanceHistory = formattedBalanceHistory.replace(/,/g, '.');
+                                        let formattedWalletDriver = Number(walletRaw).toLocaleString('vi-VN');
+                                        let formattedBalanceCard = Number(cardRaw).toLocaleString('vi-VN');
+                                        let formattedBalanceHistory = Number(historyRaw).toLocaleString('vi-VN');
 
                                         // Update the content of #WalletDriver and #BalanceCard
                                         $('#WalletDriver').text(formattedWalletDriver + " VND");
@@ -1125,7 +1095,9 @@
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Thành công!',
-                                            text: insertResponse.message + formattedBalanceHistory + " VND"
+                                            text: insertResponse.message + " " + formattedBalanceHistory + " VND"
+                                        }).then(() => {
+                                            location.reload();
                                         });
                                     } else {
                                         // Show error swal for card insertion
@@ -1136,7 +1108,9 @@
                                         });
                                     }
                                 },
-                                error: function () {
+                                error: function (xhr, status, error) {
+                                    console.error("❌ Ajax error /TaiXe/NapTien2", status, error);
+                                    console.error("Response Text:", xhr.responseText);
                                     // Show generic error swal for card insertion
                                     Swal.fire({
                                         icon: 'error',
@@ -1202,10 +1176,10 @@
                     otp += otpDigits[i].value;
                 }
                 // Fetch the data from #BalanceCard and #WalletDriver
-                var balanceCard = $('#BalanceCard').text().trim();
-                var IDbalanceCard = $('#IdCard').text().trim();
-                var amount = $('#EnterAmountPass2').text().trim();
-                var phoneNumber = $('#PhoneNumber').text().trim(); // Get the phone number from the hidden element
+                const amount = $('#EnterAmountPass2').text().trim().replace(/\./g, '');
+                const phoneNumber = $('#PhoneNumber').text().trim();
+                const soThe = $('#IdCard').text().trim();
+
                 $.ajax({
                     type: 'POST',
                     url: '/TaiXe/EnterConfirmationCode',
@@ -1229,30 +1203,28 @@
                             $.ajax({
                                 type: 'POST',
                                 url: '/TaiXe/RutTien2',
-                                data: { amount: amount, PhoneNumber: phoneNumber, SoThe: IDbalanceCard },
+                                data: { amount: amount, PhoneNumber: phoneNumber, SoThe: soThe },
                                 success: function (insertResponse) {
                                     if (insertResponse.success) {
 
-                                        // Format the numbers with thousand separators
-                                        var formattedWalletDriver = Number(insertResponse.walletDriver).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-                                        var formattedBalanceCard = Number(insertResponse.balanceCard).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-                                        var formattedBalanceHistory = Number(insertResponse.balanceHistory).toLocaleString('vi-VN', { minimumFractionDigits: 3 });
-
                                         // Replace commas with dots
-                                        formattedWalletDriver = formattedWalletDriver.replace(/,/g, '.');
-                                        formattedBalanceCard = formattedBalanceCard.replace(/,/g, '.');
-                                        formattedBalanceHistory = formattedBalanceHistory.replace(/,/g, '.');
+                                        let walletRaw = insertResponse.walletDriver.replace(/\./g, '').replace(/,/g, '');
+                                        let cardRaw = insertResponse.balanceCard.replace(/\./g, '').replace(/,/g, '');
+                                        let historyRaw = insertResponse.balanceHistory.replace(/\./g, '').replace(/,/g, '');
 
-                                        // Update the content of #WalletDriver and #BalanceCard
-                                        $('#WalletDriver').text(formattedWalletDriver + " VND");
-                                        $('#BalanceCard').text(formattedBalanceCard + " VND");
+                                        // Format the numbers with thousand separators
+                                        let formattedWalletDriver = Number(walletRaw).toLocaleString('vi-VN');
+                                        let formattedBalanceCard = Number(cardRaw).toLocaleString('vi-VN');
+                                        let formattedBalanceHistory = Number(historyRaw).toLocaleString('vi-VN');
+                                        $('#WalletDriver').text(formattedWalletDriver + ' VND');
+                                        $('#BalanceCard').text(formattedBalanceCard + ' VND');
 
                                         // Show success swal for card insertion
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Thành công!',
                                             text: insertResponse.message + formattedBalanceHistory + " VND"
-                                        });
+                                        }).then(() => location.reload());
                                     } else {
                                         // Show error swal for card insertion
                                         Swal.fire({
@@ -1359,7 +1331,7 @@
                                             icon: 'success',
                                             title: 'Thành công!',
                                             text: unlinkResponse.message
-                                        });
+                                        }).then(() => location.reload());
 
                                         // Update the content of the new-users section
                                         $('.new-users').load('/TaiXe/ViTienTaiXe .new-users', function () {

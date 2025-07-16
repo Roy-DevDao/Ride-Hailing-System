@@ -200,7 +200,7 @@
                                             <td>@nhanchuyenxe.SoDienThoai</td>
                                             <td>@nhanchuyenxe.NgayNhan.ToString("dd/MM/yyyy")</td>
                                             <td>
-                                                <p>@thongTinDatXe.ThanhTien</p>
+                                                <p>@thongTinDatXe.ThanhTien,000 VND</p>
                                             </td>
                                             <td>
                                                 @if (nhanchuyenxe.TrangThai.HasValue && nhanchuyenxe.TrangThai.Value)
@@ -328,7 +328,7 @@
                                 detailContent += '<p style="margin-right: 10px;">4. Điểm đến: ' + thongTinDatXe.DiemDen + '</p>';
                                 detailContent += '<p style="margin-right: 10px;">5. Quãng đường: ' + thongTinDatXe.SoKm + '</p>';
                                 detailContent += '<p style="margin-right: 10px;">6. Thời gian: ' + thongTinDatXe.ThoiGian + '</p>';
-                                detailContent += '<p style="margin-right: 10px;">7. Giá chuyến xe: ' + thongTinDatXe.ThanhTien + '</p>';
+                                detailContent += '<p style="margin-right: 10px;">7. Giá chuyến xe: ' + thongTinDatXe.ThanhTien + ',000 VND</p>';
                                 detailContent += '<p style="margin-right: 10px;">8. Loại xe: ' + thongTinDatXe.LoaiXe + '</p>';
                                 detailContent += '<p style="margin-right: 10px;">9. Thanh toán: ' + thongTinDatXe.HinhThucThanhToan + '</p>';
                                 detailContent += '<p style="margin-right: 10px;">10. Ngày giờ đặt: ' + formatDate(thongTinDatXe.NgayGioDat) + '</p>';

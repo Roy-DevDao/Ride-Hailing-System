@@ -220,7 +220,7 @@
                                             <td>@nhanchuyenxe.SoDienThoai</td>
                                             <td>@nhanchuyenxe.NgayNhan.ToString("dd/MM/yyyy")</td>
                                             <td>
-                                                <p>@thongTinDatXe.ThanhTien</p>
+                                                <p>@thongTinDatXe.ThanhTien,000 VND</p>
                                             </td>
                                             <td>
                                                 @if (nhanchuyenxe.TrangThai.HasValue && nhanchuyenxe.TrangThai.Value)
@@ -302,8 +302,7 @@
             data: { driverPhone: phoneNumber }, // Pass the PhoneNumber value as a parameter
             success: function (data) {
                 // Update the total doanh thu on the page
-                const str = Number(data).toLocaleString('vi-VN') + ' VND';
-                $('#totalDoanhThu').text(str);
+                $('#totalDoanhThu').text(data.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, '$1.') + " VND");
             },
             error: function () {
                 console.log('Error fetching total doanh thu.');
@@ -317,8 +316,7 @@
             data: { driverPhone: phoneNumber }, // Pass the PhoneNumber value as a parameter
             success: function (data) {
                 // Update the total doanh thu for the year 2023 on the page with currency VND
-                const str = Number(data).toLocaleString('vi-VN') + ' VND';
-                $('#totalDoanhThuNamNay').text(str);
+                $('#totalDoanhThuNamNay').text(data.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, '$1.') + ' VND');
             },
             error: function () {
                 console.log('Error fetching total doanh thu for the year 2023.');
@@ -332,8 +330,7 @@
             data: { driverPhone: phoneNumber }, // Pass the PhoneNumber value as a parameter
             success: function (data) {
                 // Update the total doanh thu for today on the page with currency VND
-                const str = Number(data).toLocaleString('vi-VN') + ' VND';
-                $('#totalDoanhThuHomNay').text(str);
+                $('#totalDoanhThuHomNay').text(data.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, '$1.') + ' VND');
             },
             error: function () {
                 console.log('Error fetching total doanh thu for today.');
