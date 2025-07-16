@@ -37,7 +37,8 @@ namespace WebsiteDatXeCongNghe.Controllers
                 NgayDanhGia = dg.NgayDanhGia.ToString("yyyy-MM-dd"),
                 Ten = dg.KhachHang != null ? dg.KhachHang.Ten : null,
                 NoiDung = dg.NoiDung,
-                MucDo = dg.MucDo
+                MucDo = dg.MucDo,
+                phone = dg.SoDienThoai
             };
 
             return Json(newReview);
@@ -97,11 +98,12 @@ namespace WebsiteDatXeCongNghe.Controllers
             // Create a response object with the updated review details
             var response = new
             {
-                HinhAnh = existingReview.KhachHang.HinhAnh,
+                existingReview.KhachHang.HinhAnh,
                 NgayDanhGia = existingReview.NgayDanhGia.ToString("dd/MM/yyyy"),
-                Ten = existingReview.KhachHang.Ten,
-                NoiDung = existingReview.NoiDung,
-                MucDo = existingReview.MucDo
+                existingReview.KhachHang.Ten,
+                existingReview.NoiDung,
+                existingReview.MucDo,
+                success = true
             };
 
             return Json(response);
@@ -142,7 +144,11 @@ namespace WebsiteDatXeCongNghe.Controllers
             {
                 db.DanhGiaUngDungs.Remove(danhGia);
                 db.SaveChanges();
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                var response = new
+                {
+                    success = true,
+                };
+                return Json(response);
             }
             return Json(new { success = false }, JsonRequestBehavior.AllowGet);
         }

@@ -163,7 +163,7 @@
     box-shadow: 0 2px 8px rgba(46,204,113,0.12);
 }
 
-#CardPayment {
+/*#CardPayment {
     background: linear-gradient(90deg, #2980b9 0%, #6dd5fa 100%);
     color: #fff;
     border: none;
@@ -180,7 +180,7 @@
         background: linear-gradient(90deg, #6dd5fa 0%, #2980b9 100%);
         transform: scale(1.05);
         box-shadow: 0 8px 32px rgba(52,152,219,0.18);
-    }
+    }*/
 
 /* Booking Button */
 #btnBooking {
