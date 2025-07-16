@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,7 +47,8 @@ namespace WebsiteDatXeCongNghe.Controllers
                 HinhAnhUpload.SaveAs(_path);
 
                 KhachHang k = db.KhachHangs.FirstOrDefault(x => x.MaKH == id);
-                k.HinhAnh = _FileName;
+                //k.HinhAnh = _FileName;
+                k.HinhAnh = "pic1.png";
                 db.SaveChanges();
             }
             ViewBag.Message = kh.Ten + kh.SoDienThoai + " Đăng ký thành công ";
@@ -573,9 +574,9 @@ namespace WebsiteDatXeCongNghe.Controllers
             try
             {
                 // Replace the credentials and SMTP server with your own
-                var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                var smtpClient = new SmtpClient("smtp.gmail.com", 465)
                 {
-                    Credentials = new NetworkCredential("dangquy360@gmail.com", "vvgtfqfpltnesshc"),
+                    Credentials = new NetworkCredential("baook01234@gmail.com", "zavspryzezkupzcr"),
                     EnableSsl = true
                 };
 
