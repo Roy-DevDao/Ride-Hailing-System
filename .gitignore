@@ -2,8 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe.csproj
-/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/Web.config
 /WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/.vs/WebsiteDatXeCongNghe.csproj.dtbcache.json
 /WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/bin/WebsiteDatXeCongNghe.dll
 /WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/bin/WebsiteDatXeCongNghe.dll.config
@@ -38,4 +36,6 @@
 /WebsiteDatXeCongNghe/.vs/WebsiteDatXeCongNghe/FileContentIndex/8999448d-3391-4219-aeba-043cdc47bb3c.vsidx
 /WebsiteDatXeCongNghe/.vs/WebsiteDatXeCongNghe/v17/fileList.bin
 /.vs/VSWorkspaceState.json
-/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe.csproj.user
+/WebsiteDatXeCongNghe/.vs/WebsiteDatXeCongNghe/copilot-chat/77faa9f3/sessions/695bc5af-c500-4030-8a90-426c1c1a6aef
+/WebsiteDatXeCongNghe/.vs/WebsiteDatXeCongNghe/FileContentIndex/9f831f3b-c458-4b5e-a2e2-a422ed0b8bb2.vsidx
+/WebsiteDatXeCongNghe/WebsiteDatXeCongNghe/bin/System.Runtime.InteropServices.RuntimeInformation.dll
