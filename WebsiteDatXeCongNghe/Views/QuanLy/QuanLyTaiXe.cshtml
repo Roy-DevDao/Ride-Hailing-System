@@ -18,6 +18,87 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Quản lý tài xế</title>
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            font-family: Arial, sans-serif;
+        }
+
+            .popup-content h3 {
+                margin-top: 0;
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            .popup-content form {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .popup-content label {
+                font-weight: 600;
+                color: #555;
+            }
+
+            .popup-content input[type="text"],
+            .popup-content input[type="email"],
+            .popup-content input[type="date"],
+            .popup-content input[type="file"] {
+                padding: 8px 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                width: 100%;
+            }
+
+            .popup-content button {
+                padding: 10px;
+                font-size: 15px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+                .popup-content button[type="submit"] {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                    .popup-content button[type="submit"]:hover {
+                        background-color: #45a049;
+                    }
+
+            .popup-content #popup-cancel {
+                background-color: #f44336;
+                color: white;
+            }
+
+                .popup-content #popup-cancel:hover {
+                    background-color: #e53935;
+                }
+
+    </style>
 </head>
 
 <body>
@@ -87,6 +168,7 @@
                         <h3>Quản lý tài xế</h3>
                         <i class='bx bx-filter'></i>
                         <i class='bx bx-search'></i>
+                        <button class="add-button">Thêm tài xế</button>
                     </div>
                     <table>
                         <thead>
@@ -100,7 +182,7 @@
                                 <th>Biển số</th>
                                 <th>CCCD</th>
                                 <th>Ngày đăng ký</th>
-                                <th colspan="2">Tùy chỉnh</th>
+                                <th>Tùy chỉnh</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,18 +194,16 @@
                                     <td><img src="~/image/TaiXe/@item.HinhAnh" alt=""></td>
                                     <td>@item.Ten</td>
                                     <td style="display:none;">@item.MaTX</td>
-                                    <td>@item.NgayThangNamSinh.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.NgayThangNamSinh.ToString("dd-MM-yyyy")</td>
                                     <td>@item.Email</td>
                                     <td>@item.SoDienThoai</td>
                                     <td>@item.BienSo</td>
                                     <td>@item.CCCD</td>
-                                    <td>@item.NgayDangKy.ToString("yyyy-MM-dd")</td>
-                                    <td class="edit-button" data-phone="@item.SoDienThoai">
-                                        Enable
-                                    </td>
-                                    <td class="delete-button" data-phone="@item.SoDienThoai">
-                                        Disable
-                                    </td>
+                                    @{
+                                        string ngayDangKy = item.NgayDangKy.HasValue ? item.NgayDangKy.Value.ToString("dd-MM-yyyy") : "";
+                                    }
+                                    <td>@ngayDangKy</td>
+                                    <td><button class="delete-button" data-id="@item.MaTX">Xóa</button></td>
                                 </tr>
                             }
                         </tbody>
@@ -133,7 +213,40 @@
 
         </main>
     </div>
+    <div id="popup" style="display:none;" class="popup-overlay">
+        <div class="popup-content">
+            <h3>Thêm tài xế</h3>
+            <form id="add-form" enctype="multipart/form-data">
 
+                <label>Họ tên:</label>
+                <input type="text" name="Ten" required>
+
+                <label>Ngày sinh:</label>
+                <input type="date" name="NgayThangNamSinh" required>
+
+                <label>Email:</label>
+                <input type="email" name="Email" required>
+
+                <label>Số điện thoại:</label>
+                <input type="text" name="SoDienThoai" required>
+
+                <label>Biển số:</label>
+                <input type="text" name="BienSo" required>
+
+                <label>CCCD:</label>
+                <input type="text" name="CCCD" required>
+
+                <label>Ngày đăng ký:</label>
+                <input type="date" name="NgayDangKy" required />
+
+                <label>Ảnh đại diện:</label>
+                <input type="file" name="HinhAnh" accept="image/*" required>
+
+                <button type="submit">Lưu</button>
+                <button type="button" id="popup-cancel">Hủy</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -161,58 +274,59 @@
 
     <script>
         $(document).ready(function () {
-            $('.edit-button').click(function () {
-                var button = $(this);
-                var phoneNumber = button.data('phone');
+            // Hiển thị popup thêm
+            $(".add-button").click(function () {
+                $("#popup").show();
+            });
 
-                // AJAX request to toggle the account status
+            // Đóng popup
+            $("#popup-cancel").click(function () {
+                $("#popup").hide();
+            });
+
+            // Gửi dữ liệu thêm
+            $("#add-form").submit(function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
                 $.ajax({
-                    url: '/TaiXe/EnableAccount',
+                    url: '/QuanLy/ThemTaiXe',
                     type: 'POST',
-                    data: { phoneNumber: phoneNumber },
-                    success: function (data) {
-                        // Show success swal
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: 'Kích hoạt tài khoản thành công!'
-                        });
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function () {
+                        Swal.fire("Thành công!", "Đã thêm tài xế mới!", "success").then(() => location.reload());
+                        $("#popup").hide();
                     },
-                    error: function (error) {
-                        console.error(error);
+                    error: function () {
+                        Swal.fire("Lỗi!", "Không thể thêm tài xế.", "error");
                     }
                 });
             });
         });
-    </script>
+        $(".delete-button").click(function () {
+            var id = $(this).data("id");
 
-    <script>
-        $(document).ready(function () {
-            $('.delete-button').click(function () {
-                var button = $(this);
-                var phoneNumber = button.data('phone');
-
-                // AJAX request to toggle the account status
-                $.ajax({
-                    url: '/TaiXe/DisableAccount',
-                    type: 'POST',
-                    data: { phoneNumber: phoneNumber },
-                    success: function (data) {
-                        // Show success swal
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Khóa!',
-                            text: 'Đã vô hiệu hóa tài khoản!'
-                        });
-                    },
-                    error: function (error) {
-                        console.error(error);
-                    }
-                });
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Hành động này không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('/QuanLy/XoaTaiXe', { id: id }, function (res) {
+                        Swal.fire('Đã xóa!', 'Tài xế đã bị xóa.', 'success').then(() => location.reload());
+                    }).fail(() => {
+                        Swal.fire("Lỗi!", "Không thể xóa.", "error");
+                    });
+                }
             });
         });
     </script>
-
     <script src="~/js/BangDieuKhien.js"></script>
     <!-- Include jQuery library -->
 </body>

@@ -28,10 +28,10 @@
                 <li data-tabs="DanhGiaUngDung">Đánh giá ứng dụng</li>
                 <li data-tabs="KhuyenMai">Khuyến mãi</li>
                 <li data-tabs="ThanhToan">Thanh toán</li>
-                <li data-tabs="DanhGiaTaiXe">Đánh giá tài xế</li>
+                @*<li data-tabs="DanhGiaTaiXe">Đánh giá tài xế</li>
                 <li data-tabs="TaiXeNhanChuyenXe">Tài xế nhận chuyến xe</li>
                 <li data-tabs="TaiKhoanNganHang">Tài khoản ngân hàng</li>
-                <li data-tabs="QuyenTaiKhoan">Quyền tài khoản</li>
+                <li data-tabs="QuyenTaiKhoan">Quyền tài khoản</li>*@
                 <li data-tabs="PhanQuyen">Phân quyền</li>
                 <li data-tabs="both" class="active">Tổng hợp</li>
             </ul>
@@ -139,7 +139,7 @@
                                     <p class="distance">Email: @item.Email</p>
                                     <p class="name">Biển số: @item.BienSo</p>
                                     <p class="distance">CCCD: @item.CCCD</p>
-                                    <p class="name">Ngày đăng ký: @item.NgayDangKy.ToString("yyyy-MM-dd")</p>
+                                    <p class="name">Ngày đăng ký: @item.NgayDangKy?.ToString("yyyy-MM-dd")</p>
                                 </div>
                             </div>
                             <div class="item_right">
@@ -305,7 +305,7 @@
                                 <div class="data">
                                     <p class="name">Số điện thoại: @item.SoDienThoai</p>
                                     <p class="name">Căn cước công dân: @item.CCCD</p>
-                                    <p class="name">Mặt trước căn cước: @item.MatTruocCCCD</p>
+                                    <p class="name">Mặt trước căn cước: @item.</p>
                                     <p class="name">Mặt sau căn cước: @item.MatSauCCCD</p>
                                     <p class="distance">Số thẻ: @item.SoThe</p>
                                     <p class="distance">Số tài khoản: @item.SoTaiKhoan</p>

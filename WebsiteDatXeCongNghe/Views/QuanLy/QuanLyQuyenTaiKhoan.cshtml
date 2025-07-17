@@ -14,6 +14,79 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Quản lý quyền tài khoản</title>
+    <style>
+    /* Nền mờ */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Hộp nội dung */
+    .popup-content {
+        background-color: #fff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        max-width: 90%;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .popup-content h3 {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 20px;
+        color: #333;
+    }
+
+    .popup-content label {
+        font-weight: 600;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        color: #444;
+    }
+
+    .popup-content input[type="text"],
+    .popup-content select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .popup-content button {
+        margin-top: 20px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .popup-content button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        margin-right: 10px;
+    }
+
+    .popup-content button#edit-cancel {
+        background-color: #f44336;
+        color: white;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -103,21 +176,33 @@
                                     <td style="display:none;">@item.MaQuyenTK</td>
                                     <td>@item.SoDienThoai</td>
                                     <td>
-                                        @if (item.MaQuyen == 5)
+                                        @if (item.MaQuyen == 3)
                                         {
-                                            <text>Admin</text>
+                                            <text>User</text>
                                         }
                                         else if (item.MaQuyen == 1)
                                         {
                                             <text>Super admin</text>
                                         }
+                                        else if (item.MaQuyen == 2)
+                                        {
+                                            <text>Driver</text>
+                                        }
                                         else
                                         {
                                             <text>Unknown</text>
                                         }
+
                                     </td>
-                                    <td><button class="edit-button">Sửa</button></td>
-                                    <td><button class="delete-button">Xóa</button></td>
+                                    <td>
+                                        <button class="edit-button"
+                                                data-id="@item.MaQuyenTK"
+                                                data-sdt="@item.SoDienThoai"
+                                                data-maquyen="@item.MaQuyen">
+                                            Sửa
+                                        </button>
+                                    </td>
+                                    <td><button class="delete-button" data-id="@item.MaQuyenTK">Xóa</button></td>
                                 </tr>
                             }
                         </tbody>
@@ -129,8 +214,28 @@
 
         </main>
     </div>
+    <div id="popup" style="display:none;" class="popup-overlay">
+        <div class="popup-content">
+            <h3>Sửa quyền tài khoản</h3>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id" />
+                <label>Số điện thoại:</label>
+                <input type="text" id="edit-sdt" disabled/>
 
+                <label>Quyền hạn:</label>
+                <select id="edit-maquyen">
+                    <option value="1">Super admin</option>
+                    <option value="2">Driver</option>
+                    <option value="3">User</option>
+                </select>
+
+                <button type="submit">Lưu</button>
+                <button type="button" id="edit-cancel">Hủy</button>
+            </form>
+        </div>
+    </div>
     <script>
+        let isEditMode = false;
         $(document).ready(function () {
             function Contains(text_one, text_two) {
                 var cleanTextOne = text_one.replace(/\s/g, "");
@@ -151,8 +256,105 @@
                     }
                 });
             });
+            $(".delete-button").click(function () {
+                var maQuyenTK = $(this).data("id");
+
+                if (confirm("Bạn có chắc chắn muốn xóa quyền tài khoản này?")) {
+                    $.ajax({
+                        url: "/QuanLy/XoaQuyenTaiKhoan",
+                        type: "POST",
+                        data: { id: maQuyenTK },
+                        success: function (result) {
+                            alert("Xóa thành công!");
+                            $("#row_" + maQuyenTK).remove();
+                        },
+                        error: function (xhr) {
+                            alert("Xóa thất bại!");
+                        }
+                    });
+                }
+            });
+            $("#edit-form").submit(function (e) {
+                e.preventDefault();
+
+                var id = $("#edit-id").val();
+                var sdt = $("#edit-sdt").val();
+                var maquyen = $("#edit-maquyen").val();
+
+                if (sdt.trim() === "") {
+                    alert("Số điện thoại không được để trống");
+                    return;
+                }
+
+                if (isEditMode) {
+                    // Gọi sửa
+                    $.ajax({
+                        url: "/QuanLy/SuaQuyenTaiKhoan",
+                        type: "POST",
+                        data: { id: id, maquyen: maquyen },
+                        success: function () {
+                            alert("Cập nhật thành công!");
+                            location.reload();
+                        },
+                        error: function () {
+                            alert("Cập nhật thất bại!");
+                        }
+                    });
+                } else {
+                    // Gọi thêm
+                    $.ajax({
+                        url: "/QuanLy/ThemQuyenTaiKhoan",
+                        type: "POST",
+                        data: { sdt: sdt, maquyen: maquyen },
+                        success: function (res) {
+                            if (res.success) {
+                                alert("Thêm thành công!");
+                                location.reload();
+                            } else {
+                                alert(res.message || "Thêm thất bại");
+                            }
+                        },
+                        error: function () {
+                            alert("Thêm thất bại!");
+                        }
+                    });
+                }
+            });
+            // Ẩn popup khi nhấn "Hủy"
+            $("#edit-cancel").click(function () {
+                $("#popup").hide();
+            });
+
+            // Gửi yêu cầu cập nhật khi nhấn "Lưu"
+            $(".edit-button").click(function () {
+                isEditMode = true;
+
+                var id = $(this).data("id");
+                var sdt = $(this).data("sdt");
+                var maquyen = $(this).data("maquyen");
+
+                $("#edit-id").val(id);
+                $("#edit-sdt").val(sdt).prop("disabled", true); // không cho sửa
+                $("#edit-maquyen").val(maquyen);
+
+                $(".popup-content h3").text("Sửa quyền tài khoản");
+                $("#popup").show();
+            });
+
+            $(".add-button").click(function () {
+                isEditMode = false;
+
+                $("#edit-id").val("");
+                $("#edit-sdt").val("").prop("disabled", false); // có thể nhập
+                $("#edit-maquyen").val("");
+
+                $(".popup-content h3").text("Thêm quyền tài khoản");
+                $("#popup").show();
+            });
         });
     </script>
+    <style>
+    </style>
     <!-- Scripts -->
     <script src="~/js/BangDieuKhien.js"></script>
     <!-- Include jQuery library -->

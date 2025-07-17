@@ -14,6 +14,97 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Quản lý phân quyền</title>
+    <style>
+        /* Overlay */
+.popup {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    font-family: 'Segoe UI', sans-serif;
+    animation: zoomIn 0.3s ease-in-out;
+}
+
+/* Title */
+.popup-content h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+}
+
+/* Label */
+.popup-content label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+/* Input */
+.popup-content input[type="text"],
+.popup-content input[type="number"],
+.popup-content input[type="hidden"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+}
+.popup-content input:focus {
+    border-color: #007bff;
+}
+
+/* Button group */
+.popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Buttons */
+.popup-actions button {
+    padding: 8px 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#saveEditBtn {
+    background-color: #007bff;
+    color: white;
+}
+#saveEditBtn:hover {
+    background-color: #0056b3;
+}
+
+#cancelEditBtn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+#cancelEditBtn:hover {
+    background-color: #c2c2c2;
+}
+    </style>
 </head>
 
 <body>
@@ -114,8 +205,20 @@
 
         </main>
     </div>
-
+    <div id="Popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h3>Sửa quyền</h3>
+            <input type="hidden" id="editMaQuyen" />
+            <label for="editTenQuyen">Tên quyền:</label>
+            <input type="text" id="editTenQuyen" />
+            <div class="popup-actions">
+                <button id="saveEditBtn">Lưu</button>
+                <button id="cancelEditBtn">Hủy</button>
+            </div>
+        </div>
+    </div>
     <script>
+        let isEditMode = false;
         $(document).ready(function () {
             function Contains(text_one, text_two) {
                 var cleanTextOne = text_one.replace(/\s/g, "");
@@ -136,6 +239,95 @@
                     }
                 });
             });
+        });
+        $(document).ready(function () {
+            // Mở popup sửa
+            $('.edit-button').click(function () {
+                isEditMode = true
+                var row = $(this).closest('tr');
+                var maQuyen = row.find('td:eq(1)').text().trim();
+                var tenQuyen = row.find('td:eq(2)').text().trim();
+
+                $('#editMaQuyen').val(maQuyen);
+                $('#editTenQuyen').val(tenQuyen);
+                $('#Popup').fadeIn();
+            });
+
+            // Đóng popup
+            $('#cancelEditBtn').click(function () {
+                $('#Popup').fadeOut();
+            });
+
+            // Gửi request sửa
+            $('#saveEditBtn').click(function () {
+                var id = $('#editMaQuyen').val();
+                var tenQuyen = $('#editTenQuyen').val();
+
+                if (tenQuyen.trim() === "") {
+                    alert("Tên quyền không được để trống");
+                    return;
+                }
+
+                if (isEditMode) {
+                    // Gọi API sửa
+                    $.post('/QuanLy/SuaPhanQuyen', { id: id, tenQuyen: tenQuyen }, function (res) {
+                        if (res.success) {
+                            alert("Cập nhật thành công!");
+                            location.reload();
+                        } else {
+                            alert("Lỗi cập nhật.");
+                        }
+                    }).fail(function () {
+                        alert("Lỗi server.");
+                    });
+                } else {
+                    // Gọi API thêm
+                    $.post('/QuanLy/ThemPhanQuyen', { tenQuyen: tenQuyen }, function (res) {
+                        if (res.success) {
+                            alert("Đã thêm quyền mới!");
+                            location.reload();
+                        } else {
+                            alert(res.message || "Thêm quyền thất bại");
+                        }
+                    }).fail(function () {
+                        alert("Lỗi server.");
+                    });
+                }
+            });
+
+            // Xóa quyền
+            $('.delete-button').click(function () {
+                if (!confirm("Bạn chắc chắn muốn xóa quyền này?")) return;
+
+                var row = $(this).closest('tr');
+                var id = row.find('td:eq(1)').text().trim();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/QuanLy/XoaPhanQuyen',
+                    data: { id: id },
+                    success: function (res) {
+                        if (res.success) {
+                            alert("Xóa thành công!");
+                            location.reload();
+                        } else {
+                            alert("Không thể xóa.");
+                        }
+                    },
+                    error: function () {
+                        alert("Lỗi server.");
+                    }
+                });
+            });
+        });
+        $('.add-button').click(function () {
+            isEditMode = false;
+
+            $('#editMaQuyen').val('');
+            $('#editTenQuyen').val('');
+            $('#Popup h3').text('Thêm quyền');
+
+            $('#Popup').fadeIn();
         });
     </script>
     <!-- Scripts -->

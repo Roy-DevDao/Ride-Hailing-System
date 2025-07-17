@@ -14,6 +14,73 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Quản lý khuyến mãi</title>
+    <style>
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+            .popup-content h3 {
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
+
+            .popup-content label {
+                display: block;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            .popup-content input, .popup-content select {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+            }
+
+        .popup-actions {
+            margin-top: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+            .popup-actions button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+        #saveEditBtn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #cancelEditBtn {
+            background-color: #ccc;
+            color: #000;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -109,8 +176,8 @@
                                     <td style="display:none;">@item.MaKhuyenMai</td>
                                     <td>@item.TenKhuyenMai</td>
                                     <td>@item.PhanTram</td>
-                                    <td>@item.NgayBatDau.ToString("yyyy-MM-dd")</td>
-                                    <td>@item.NgayKetThuc.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.NgayBatDau.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.NgayKetThuc.ToString("dd-MM-yyyy")</td>
                                     <td>@item.NoiDung</td>
                                     <td>
                                         @if (item.TrangThai)
@@ -134,8 +201,43 @@
 
         </main>
     </div>
+    <div id="Popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h3 id="popup-title">Sửa khuyến mãi</h3>
+            <input type="hidden" id="editMaKhuyenMai" />
 
+            <label>Mã code</label>
+            <input type="text" id="editMaCode" />
+
+            <label>Tên khuyến mãi</label>
+            <input type="text" id="editTenKhuyenMai" />
+
+            <label>Phần trăm giảm</label>
+            <input type="number" id="editPhanTram" />
+
+            <label>Ngày bắt đầu</label>
+            <input type="date" id="editNgayBatDau" />
+
+            <label>Ngày kết thúc</label>
+            <input type="date" id="editNgayKetThuc" />
+
+            <label>Nội dung</label>
+            <input type="text" id="editNoiDung" />
+
+            <label>Trạng thái</label>
+            <select id="editTrangThai">
+                <option value="true">Available</option>
+                <option value="false">Unavailable</option>
+            </select>
+
+            <div class="popup-actions">
+                <button id="saveEditBtn">Lưu</button>
+                <button id="cancelEditBtn">Hủy</button>
+            </div>
+        </div>
+    </div>
     <script>
+        let isEditMode = false;
         $(document).ready(function () {
             function Contains(text_one, text_two) {
                 var cleanTextOne = text_one.replace(/\s/g, "");
@@ -157,6 +259,120 @@
                 });
             });
         });
+        $('.edit-button').click(function () {
+            isEditMode = true;
+            var row = $(this).closest('tr');
+            var maKhuyenMai = row.attr('id').split('_')[1];
+            var maCode = row.find('td:eq(1)').text().trim();
+            var ten = row.find('td:eq(3)').text().trim();
+            var phanTram = row.find('td:eq(4)').text().trim();
+            var batDau = row.find('td:eq(5)').text().trim();
+            var ketThuc = row.find('td:eq(6)').text().trim();
+            var noiDung = row.find('td:eq(7)').text().trim();
+            var trangThai = row.find('td:eq(8)').text().includes("Available");
+
+            $('#editMaKhuyenMai').val(maKhuyenMai);
+            $('#editMaCode').val(maCode);
+            $('#editTenKhuyenMai').val(ten);
+            $('#editPhanTram').val(phanTram);
+            $('#editNgayBatDau').val(convertDateFormat(batDau));
+            $('#editNgayKetThuc').val(convertDateFormat(ketThuc));
+            $('#editNoiDung').val(noiDung);
+            $('#editTrangThai').val(trangThai ? 'true' : 'false');
+
+            $('.popup-content h3').text('Sửa khuyến mãi');
+            $('#Popup').fadeIn();
+        });
+
+        // Hủy popup
+        $('#cancelEditBtn').click(function () {
+            $('#Popup').fadeOut();
+        });
+
+        // Gửi sửa
+        $('#saveEditBtn').click(function () {
+            const data = {
+                maCode: $('#editMaCode').val(),
+                ten: $('#editTenKhuyenMai').val(),
+                giamgia: parseInt($('#editPhanTram').val()),
+                ngayBatDau: $('#editNgayBatDau').val(),
+                ngayKetThuc: $('#editNgayKetThuc').val(),
+                noiDung: $('#editNoiDung').val(),
+                trangThai: $('#editTrangThai').val() === 'true'
+            };
+
+            if (isEditMode) {
+                data.id = parseInt($('#editMaKhuyenMai').val());
+                $.post('/QuanLy/SuaKhuyenMai', data, function (res) {
+                    if (res.success) {
+                        alert("Đã cập nhật!");
+                        location.reload();
+                    } else {
+                        alert("Lỗi cập nhật");
+                    }
+                }).fail(function () {
+                    alert("Lỗi server");
+                });
+            } else {
+                $.post('/QuanLy/ThemKhuyenMai', data, function (res) {
+                    if (res.success) {
+                        alert("Đã thêm!");
+                        location.reload();
+                    } else {
+                        alert("Lỗi thêm khuyến mãi");
+                    }
+                }).fail(function () {
+                    alert("Lỗi server");
+                });
+            }
+        });
+
+
+        // Xóa khuyến mãi
+        $('.delete-button').click(function () {
+            if (!confirm("Bạn có chắc muốn xóa?")) return;
+
+            var id = $(this).closest('tr').attr('id').split('_')[1];
+            $.ajax({
+                type: 'POST',
+                url: '/QuanLy/XoaKhuyenMai',
+                data: { id: id },
+                success: function (res) {
+                    if (res.success) {
+                        alert("Đã xóa!");
+                        location.reload();
+                    } else {
+                        alert("Không thể xóa");
+                    }
+                },
+                error: function () {
+                    alert("Lỗi server");
+                }
+            });
+        });
+        $('.add-button').click(function () {
+            isEditMode = false;
+
+            // Clear các input
+            $('#editMaKhuyenMai').val('');
+            $('#editMaCode').val('');
+            $('#editTenKhuyenMai').val('');
+            $('#editPhanTram').val('');
+            $('#editNgayBatDau').val('');
+            $('#editNgayKetThuc').val('');
+            $('#editNoiDung').val('');
+            $('#editTrangThai').val('true');
+
+            $('.popup-content h3').text('Thêm khuyến mãi');
+            $('#Popup').fadeIn();
+        });
+        function convertDateFormat(dateStr) {
+            var parts = dateStr.split('-');
+            if (parts.length === 3) {
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
+            }
+            return '';
+        }
     </script>
     <!-- Scripts -->
     <script src="~/js/BangDieuKhien.js"></script>

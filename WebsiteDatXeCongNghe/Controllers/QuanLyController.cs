@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteDatXeCongNghe.Models;
@@ -275,6 +277,266 @@ namespace WebsiteDatXeCongNghe.Controllers
             mymodel.phanQuyens = db.PhanQuyens.ToList();
 
             return View(mymodel);
+        }
+        [HttpPost]
+        public ActionResult XoaQuyenTaiKhoan(int id)
+        {
+            var quyen = db.QuyenTaiKhoans.FirstOrDefault(q => q.MaQuyenTK == id);
+            if (quyen != null)
+            {
+                db.QuyenTaiKhoans.Remove(quyen);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        public ActionResult SuaQuyenTaiKhoan(int id, int maquyen, string sdt)
+        {
+            var quyen = db.QuyenTaiKhoans.FirstOrDefault(q => q.MaQuyenTK == id);
+            if (quyen != null)
+            {
+                quyen.MaQuyen = maquyen;
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        public ActionResult XoaPhanQuyen(int id)
+        {
+            var quyen = db.PhanQuyens.FirstOrDefault(q => q.MaQuyen == id);
+            if (quyen != null)
+            {
+                db.PhanQuyens.Remove(quyen);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        public ActionResult SuaPhanQuyen(int id,string tenquyen)
+        {
+            var quyen = db.PhanQuyens.FirstOrDefault(q => q.MaQuyen == id);
+            if (quyen != null)
+            {
+                quyen.TenQuyen = tenquyen;
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        public JsonResult SuaKhuyenMai(int id, string maCode, string ten, int giamgia,
+    DateTime ngayBatDau, DateTime ngayKetThuc, string noiDung, bool trangThai)
+        {
+            try
+            {
+                // Validate dữ liệu
+                if (string.IsNullOrEmpty(maCode) || string.IsNullOrEmpty(ten))
+                {
+                    return Json(new { success = false, message = "Thiếu thông tin bắt buộc" });
+                }
+
+                if (ngayKetThuc <= ngayBatDau)
+                {
+                    return Json(new { success = false, message = "Ngày kết thúc phải sau ngày bắt đầu" });
+                }
+
+                if (giamgia < 0 || giamgia > 100)
+                {
+                    return Json(new { success = false, message = "Phần trăm giảm giá phải từ 0 đến 100" });
+                }
+
+                var km = db.KhuyenMais.FirstOrDefault(x => x.MaKhuyenMai == id);
+                if (km != null)
+                {
+                    // Kiểm tra mã code có trùng không (trừ chính nó)
+                    var existingCode = db.KhuyenMais.FirstOrDefault(x => x.MaCode == maCode && x.MaKhuyenMai != id);
+                    if (existingCode != null)
+                    {
+                        return Json(new { success = false, message = "Mã code đã tồn tại" });
+                    }
+
+                    km.MaCode = maCode;
+                    km.TenKhuyenMai = ten;
+                    km.PhanTram = giamgia;
+                    km.NgayBatDau = ngayBatDau;
+                    km.NgayKetThuc = ngayKetThuc;
+                    km.NoiDung = noiDung;
+                    km.TrangThai = trangThai;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Cập nhật thành công" });
+                }
+                return Json(new { success = false, message = "Không tìm thấy khuyến mãi" });
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi để debug
+                System.Diagnostics.Debug.WriteLine($"Error in SuaKhuyenMai: {ex.Message}");
+                return Json(new { success = false, message = "Lỗi server: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult XoaKhuyenMai(int id)
+        {
+            var km = db.KhuyenMais.FirstOrDefault(x => x.MaKhuyenMai == id);
+            if (km != null)
+            {
+                db.KhuyenMais.Remove(km);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult ThemKhuyenMai(string maCode, string ten, int giamgia, DateTime ngayBatDau, DateTime ngayKetThuc, string noiDung, bool trangThai)
+        {
+            try
+            {
+                var existed = db.KhuyenMais.Any(km => km.MaCode.ToLower() == maCode.ToLower());
+                if (existed)
+                {
+                    return Json(new { success = false, message = "Mã khuyến mãi đã tồn tại!" });
+                }
+                var khuyenMai = new KhuyenMai
+                {
+                    MaCode = maCode,
+                    TenKhuyenMai = ten,
+                    PhanTram = giamgia,
+                    NgayBatDau = ngayBatDau,
+                    NgayKetThuc = ngayKetThuc,
+                    NoiDung = noiDung,
+                    TrangThai = trangThai
+                };
+
+                // Lưu vào DB
+                db.KhuyenMais.Add(khuyenMai);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                // Ghi log nếu cần
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult ThemPhanQuyen(string tenQuyen)
+        {
+            try
+            {
+                // Kiểm tra tên quyền có bị trùng không (nếu muốn)
+                var existed = db.PhanQuyens.Any(p => p.TenQuyen.ToLower() == tenQuyen.ToLower());
+                if (existed)
+                {
+                    return Json(new { success = false, message = "Tên quyền đã tồn tại!" });
+                }
+
+                var newQuyen = new PhanQuyen
+                {
+                    TenQuyen = tenQuyen
+                };
+
+                db.PhanQuyens.Add(newQuyen);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult ThemQuyenTaiKhoan(string sdt, int maquyen)
+        {
+            try
+            {
+                var user = db.TaiKhoans.FirstOrDefault(x => x.SoDienThoai == sdt);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Số điện thoại không tồn tại trong hệ thống." });
+                }
+
+                var existed = db.QuyenTaiKhoans.Any(x => x.SoDienThoai == sdt);
+                if (existed)
+                {
+                    return Json(new { success = false, message = "Tài khoản này đã có quyền." });
+                }
+
+                var qtk = new QuyenTaiKhoan
+                {
+                    SoDienThoai = sdt,
+                    MaQuyen = maquyen
+                };
+
+                db.QuyenTaiKhoans.Add(qtk);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Lỗi server: " + ex.Message });
+            }
+        }
+        [HttpPost]
+        public ActionResult ThemTaiXe(HttpPostedFileBase HinhAnh, string Ten, DateTime NgayThangNamSinh, string Email, string SoDienThoai, string BienSo, string CCCD, DateTime NgayDangKy)
+        {
+            try
+            {
+                if (HinhAnh == null || HinhAnh.ContentLength == 0)
+                {
+                    return Json(new { success = false, message = "Ảnh đại diện không được để trống!" });
+                }
+
+                string fileName = Path.GetFileName(HinhAnh.FileName);
+                string path = Path.Combine(Server.MapPath("~/image/TaiXe"), fileName);
+                HinhAnh.SaveAs(path);
+
+                var tx = new TaiXe
+                {
+                    Ten = Ten,
+                    NgayThangNamSinh = NgayThangNamSinh,
+                    Email = Email,
+                    SoDienThoai = SoDienThoai,
+                    BienSo = BienSo,
+                    CCCD = CCCD,
+                    HinhAnh = fileName,
+                    NgayDangKy = NgayDangKy,
+                    DiemUyTin = 0,
+                    ViTien = 0,
+                    MucDoDanhGiaTB = null,
+                    ViTri = " "
+                };
+
+                db.TaiXes.Add(tx);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult XoaTaiXe(int id)
+        {
+            var tx = db.TaiXes.FirstOrDefault(x => x.MaTX == id);
+            if (tx != null)
+            {
+                db.TaiXes.Remove(tx);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
     }
