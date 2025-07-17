@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
     --light: #f6f6f9;
@@ -511,9 +511,13 @@ body {
                         background: var(--grey);
                     }
 
+                .content main .bottom-data .orders table tr td {
+                    padding-left: 15px;
+                }
+
                 .content main .bottom-data .orders table tr td .status {
                     font-size: 10px;
-                    padding: 6px 16px;
+                    padding: 8px 16px;
                     color: var(--light);
                     border-radius: 20px;
                     font-weight: 700;
@@ -742,11 +746,68 @@ select {
     .close-button:hover {
         background: #DD0000;
     }
+    .search-filter-container {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+        margin-bottom: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 
+    /* === Search Wrapper (input + icon) === */
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0 12px;
+        background-color: #fff;
+        width: 260px;
+        height: 40px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .search-wrapper:focus-within {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.15);
+        }
+
+    .search-icon {
+        font-size: 18px;
+        color: #888;
+        margin-right: 8px;
+        line-height: 1;
+    }
+
+    .search-input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        flex: 1;
+        height: 100%;
+        background: transparent;
+    }
+
+    /* === Filter Dropdown === */
+    #statusFilter {
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        width: 180px;
+    }
+
+        #statusFilter:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.15);
+        }
 /* Add some styles for your detailed content inside the popup */
-
-
-
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 200px;
