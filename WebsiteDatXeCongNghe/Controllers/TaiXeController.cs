@@ -1074,14 +1074,14 @@ namespace WebsiteDatXeCongNghe.Controllers
             {
                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-
+                decimal viTienDong = taiXe.ViTien * 1000m;
                 if (amount < 10000m)
                     return Json(new { success = false, message = "Số tiền phải ≥ 10.000 VNĐ." });
 
                 if (taiXe == null || taiKhoan == null)
                     return Json(new { success = false, message = "Không tìm thấy tài khoản." });
 
-                if (amount > taiXe.ViTien)
+                if (amount > viTienDong)
                     return Json(new { success = false, message = "Không đủ tiền trong ví." });
 
                 // Gửi mã OTP

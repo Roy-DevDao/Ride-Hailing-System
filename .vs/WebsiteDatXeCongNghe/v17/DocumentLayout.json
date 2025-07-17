@@ -3,20 +3,52 @@
   "WorkspaceRootPath": "E:\\FPT software document\\Ki 7\\Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|e:\\fpt software document\\ki 7\\project\\websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thongke\\thongkedoanhthu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thongke\\thongkedoanhthu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|e:\\fpt software document\\ki 7\\project\\websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thanhtoan\\thongtinthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thanhtoan\\thongtinthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\thongtintaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\thongtintaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\thongtinnhanchuyen.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\thongtinnhanchuyen.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\taixe\\vitientaixe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoantx.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thanhtoan\\chitietthanhtoan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\views\\thongke\\thongkedoanhthu2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\views\\thongke\\thongkedoanhthu2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\thanhtoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\thanhtoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\thongkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\thongkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|solutionrelative:websitedatxecongnghe\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C9AE27F-82B2-4FCA-82A4-77E937A880A3}|WebsiteDatXeCongNghe\\WebsiteDatXeCongNghe.csproj|E:\\FPT software document\\Ki 7\\Project\\websitedatxecongnghe\\controllers\\danhgiaungdungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,7 +102,141 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ViTienTaiXe.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
+              "ViewState": "AgIAAH0FAAAAAAAAAAAgwJ8FAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T09:03:38.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaiXeController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
+              "ViewState": "AgIAAC8EAAAAAAAAAAAUwDsEAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T09:03:49.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ThongKeDoanhThu.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu.cshtml",
+              "ViewState": "AgIAAGwBAAAAAAAAAAAmwIwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:38:19.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ThongTinNhanChuyen.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinNhanChuyen.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinNhanChuyen.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinNhanChuyen.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinNhanChuyen.cshtml",
+              "ViewState": "AgIAAHwBAAAAAAAAAAAgwJ4BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:39:11.055Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ThongTinThanhToanTX.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ThongTinThanhToanTX.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ThongTinThanhToanTX.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ThongTinThanhToanTX.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ThongTinThanhToanTX.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:38:54.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ChiTietThanhToan.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToan.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToan.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToan.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToan.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:38:42.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ChiTietThanhToanTX.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
+              "ViewState": "AgIAAFoBAAAAAAAAAAAgwHwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-15T13:04:44.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ThongKeDoanhThu2.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu2.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu2.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu2.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThongKe\\ThongKeDoanhThu2.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAgwEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:38:36.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ThongTinTaiXe.cshtml",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ThongTinTaiXe.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOIDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T17:39:51.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ThanhToanController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\ThanhToanController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\ThanhToanController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\ThanhToanController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\ThanhToanController.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAgwNwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-16T17:37:25.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ThongKeController.cs",
+              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\ThongKeController.cs",
+              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\ThongKeController.cs",
+              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\ThongKeController.cs",
+              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\ThongKeController.cs",
+              "ViewState": "AgIAAL8BAAAAAAAAAAAiwNsBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-16T17:31:55.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "TaiKhoanController.cs",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiKhoanController.cs",
@@ -82,45 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ViTienTaiXe.cshtml",
-              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
-              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\ViTienTaiXe.cshtml",
-              "ViewState": "AgIAACUFAAAAAAAAAAAAADUFAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-15T09:03:38.072Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaiXeController.cs",
-              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Controllers\\TaiXeController.cs",
-              "ViewState": "AgIAAEwEAAAAAAAAAAAuwFwEAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-15T09:03:49.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ChiTietThanhToanTX.cshtml",
-              "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
-              "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
-              "ToolTip": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
-              "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\ThanhToan\\ChiTietThanhToanTX.cshtml",
-              "ViewState": "AgIAAF8BAAAAAAAAAAAAAFsBAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-15T13:04:44.046Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "DanhGiaUngDungController.cs",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaUngDungController.cs",
@@ -132,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "DanhGiaController.cs",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\DanhGiaController.cs",
@@ -144,7 +272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 14,
               "Title": "KhuyenMaiController.cs",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Controllers\\KhuyenMaiController.cs",
@@ -156,7 +284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "KhachDuocDon.cshtml",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\DatXe\\KhachDuocDon.cshtml",
@@ -168,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
               "Title": "TaiXeDonKhach.cshtml",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiXeDonKhach.cshtml",
@@ -180,7 +308,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 17,
               "Title": "TaiKhoanNganHangTX.cshtml",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
@@ -188,12 +316,11 @@
               "RelativeToolTip": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TaiKhoanNganHangTX.cshtml",
               "ViewState": "AgIAAHwAAAAAAAAAAAAmwLAAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-15T11:34:17.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-15T11:34:17.736Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 18,
               "Title": "TraKhach.cshtml",
               "DocumentMoniker": "E:\\FPT software document\\Ki 7\\Project\\WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
               "RelativeDocumentMoniker": "WebsiteDatXeCongNghe\\Views\\TaiXe\\TraKhach.cshtml",
@@ -209,6 +336,10 @@
           "DockedWidth": 148,
           "SelectedChildIndex": -1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
