@@ -1,11 +1,73 @@
-﻿@model WebsiteDatXeCongNghe.ViewModel.MultipleData.MultipleData
+@model WebsiteDatXeCongNghe.ViewModel.MultipleData.MultipleData
 @{
     ViewBag.Title = "ThongKeDoanhThu";
     Layout = null;
 }
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .search-filter-container {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+        margin-bottom: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 
+    /* === Search Wrapper (input + icon) === */
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0 12px;
+        background-color: #fff;
+        width: 260px;
+        height: 40px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .search-wrapper:focus-within {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.15);
+        }
+
+    .search-icon {
+        font-size: 18px;
+        color: #888;
+        margin-right: 8px;
+        line-height: 1;
+    }
+
+    .search-input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        flex: 1;
+        height: 100%;
+        background: transparent;
+    }
+
+    /* === Filter Dropdown === */
+    #statusFilter {
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        width: 180px;
+    }
+
+        #statusFilter:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.15);
+        }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +89,6 @@
         <ul class="side-menu">
             <li class="active"><a href="/ThongKe/ThongKeDoanhThu"><i class='bx bxs-dashboard'></i>Doanh thu tài xế</a></li>
             <li><a href="/TaiXe/ThongTinNhanChuyen"><i class='bx bx-cycling'></i>Chuyến xe</a></li>
-            <li><a href="#"><i class='bx bx-cog'></i>Cài đặt</a></li>
         </ul>
         <ul class="side-menu">
             <li>
@@ -124,8 +185,18 @@
                     <div class="header">
                         <i class='bx bx-cycling'></i>
                         <h3>Chuyến xe gần đây</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-search'></i>
+                        <div class="search-filter-container">
+                            <div class="search-wrapper">
+                                <i class='bx bx-search search-icon'></i>
+                                <input type="text" id="searchInput" placeholder="Tìm theo số điện thoại..." class="search-input" />
+                            </div>
+
+                            <select id="statusFilter" style="padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="completed">Hoàn thành</option>
+                                <option value="pending">Chưa hoàn thành</option>
+                            </select>
+                        </div>
                     </div>
                     <table>
                         <thead>
@@ -144,12 +215,12 @@
                                     var thongTinDatXe = Model.thongTinDatXes.FirstOrDefault(tt => tt.MaDatXe == nhanchuyenxe.MaDatXe);
                                     if (thongTinDatXe != null)
                                     {
-                                        <tr>
+                                        <tr class="SearchRow">
 
                                             <td>@nhanchuyenxe.SoDienThoai</td>
-                                            <td>@nhanchuyenxe.NgayNhan.ToString("yyyy-MM-dd")</td>
+                                            <td>@nhanchuyenxe.NgayNhan.ToString("dd/MM/yyyy")</td>
                                             <td>
-                                                <p>@thongTinDatXe.ThanhTien</p>
+                                                <p>@thongTinDatXe.ThanhTien,000 VND</p>
                                             </td>
                                             <td>
                                                 @if (nhanchuyenxe.TrangThai.HasValue && nhanchuyenxe.TrangThai.Value)
@@ -280,6 +351,32 @@
             }
         });
     });
+            $(document).ready(function () {
+                // Tìm kiếm theo số điện thoại
+                $('#searchInput').on('keyup', function () {
+                    var value = $(this).val().toLowerCase();
+                    $('.SearchRow').filter(function () {
+                        $(this).toggle($(this).find('td:first').text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+
+                // Lọc theo trạng thái
+                $('#statusFilter').on('change', function () {
+                    var filter = $(this).val();
+                    $('.SearchRow').each(function () {
+                        var statusSpan = $(this).find('td span.status');
+                        var status = statusSpan.hasClass('completed') ? 'completed' :
+                            statusSpan.hasClass('pending') ? 'pending' : '';
+
+                        if (filter === "" || status === filter) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+
         </script>
 
     </div>
