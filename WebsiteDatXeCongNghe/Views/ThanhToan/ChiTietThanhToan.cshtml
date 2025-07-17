@@ -126,7 +126,7 @@
                                     Số hóa đơn: @item.MaThanhToan<br />
                                     Ngày giờ tạo: @item.NgayThanhToan<br />
                                     Trạng thái hóa đơn: @{
-                                        if (item.TrangThai)
+                                        if (item.TrangThai == true)
                                         {
                                             <text>Hoàn thành</text>
                                         }
@@ -222,7 +222,7 @@
 
                     <td>
                         @{
-                            if (item.TrangThai)
+                            if (item.TrangThai == true)
                             {
                                 <text>Hoàn thành</text>
                             }
