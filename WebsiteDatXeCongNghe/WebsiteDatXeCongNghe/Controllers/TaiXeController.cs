@@ -21,121 +21,131 @@ namespace WebsiteDatXeCongNghe.Controllers
         private DichVuDatXeWebsite3Entities db = new DichVuDatXeWebsite3Entities();
         // GET: TaiXe
         public ActionResult ThongTinTaiXe()
-        {            
-            if (Session["SoDienThoai"] != null)
-            {
-                string a = Session["SoDienThoai"].ToString();
-                var query = (from k in db.TaiXes
-                             join t in db.TaiKhoans on k.SoDienThoai equals t.SoDienThoai
-                             where (k.SoDienThoai == a)
-                             select k).ToList();
-                return View(query);
-            }
-            else
-            {
-                return RedirectToAction("DangNhap", "TaiKhoan");
-            }
-        }
-        public ActionResult ThongTinCaNhanTaiXe()
-        {            
-            if (Session["SoDienThoai"] != null)
-            {
-                string a = Session["SoDienThoai"].ToString();
-                var query = (from k in db.TaiXes
-                             join t in db.TaiKhoans on k.SoDienThoai equals t.SoDienThoai
-                             where (k.SoDienThoai == a)
-                             select k).ToList();
-                return View(query);
-            }
-            else
-            {
-                return RedirectToAction("DangNhap", "TaiKhoan");
-            }
-        }
-        public ActionResult SuaDoiTX(int? id)
-        {
-            if (id == null)
-            {
-                // Handle the case when 'id' is null
-                return RedirectToAction("ThongTinCaNhanTaiXe");
-            }
-
-            var TaiXe = db.TaiXes.FirstOrDefault(k => k.MaTX == id);
-            if (TaiXe == null)
-            {
-                // Handle the case when 'TaiXe' is null
-                return RedirectToAction("ThongTinCaNhanTaiXe");
-            }
-
-            var TaiXeDTO = new TaiXeDTO
-            {
-                MaTX = TaiXe.MaTX,
-                SoDienThoai = TaiXe.SoDienThoai,
-                Ten = TaiXe.Ten,
-                NgayThangNamSinh = TaiXe.NgayThangNamSinh,
-                Email = TaiXe.Email,
-                BienSo = TaiXe.BienSo,
-                CCCD = TaiXe.CCCD,
-                HinhAnh = TaiXe.HinhAnh
-            };
-
-            return Json(TaiXeDTO, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-        [HttpPost]
-        public ActionResult SuaDoiTX(TaiXe tx, HttpPostedFileBase HinhAnhUpload)
-        {
-            if (HinhAnhUpload != null)
-            {
-                string path = uploadimage(HinhAnhUpload);
-                tx.HinhAnh = path;
-            }
-
-            if (ModelState.IsValid)
-            {
-                db.Entry(tx).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ThongTinCaNhanTaiXe");
-            }
-
-            return View(tx);
-        }
-
-        public string uploadimage(HttpPostedFileBase file)
-        {
-            Random r = new Random();
-            string path = "-1";
-            int random = r.Next();
-            if (file != null && file.ContentLength > 0)
-            {
-                string extension = Path.GetExtension(file.FileName);
-                if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png"))
+            {            
+                if (Session["SoDienThoai"] != null)
                 {
-                    try
+                    string a = Session["SoDienThoai"].ToString();
+                    var query = (from k in db.TaiXes
+                                 join t in db.TaiKhoans on k.SoDienThoai equals t.SoDienThoai
+                                 where (k.SoDienThoai == a)
+                                 select k).ToList();
+                    return View(query);
+                }
+                else
+                {
+                    return RedirectToAction("DangNhap", "TaiKhoan");
+                }
+            }
+            public ActionResult ThongTinCaNhanTaiXe()
+            {            
+                if (Session["SoDienThoai"] != null)
+                {
+                    string a = Session["SoDienThoai"].ToString();
+                    var query = (from k in db.TaiXes
+                                 join t in db.TaiKhoans on k.SoDienThoai equals t.SoDienThoai
+                                 where (k.SoDienThoai == a)
+                                 select k).ToList();
+                    return View(query);
+                }
+                else
+                {
+                    return RedirectToAction("DangNhap", "TaiKhoan");
+                }
+            }
+            public ActionResult SuaDoiTX(int? id)
+            {
+                if (id == null)
+                {
+                    // Handle the case when 'id' is null
+                    return RedirectToAction("ThongTinCaNhanTaiXe");
+                }
+            
+                var TaiXe = db.TaiXes.FirstOrDefault(k => k.MaTX == id);
+                if (TaiXe == null)
+                {
+                    // Handle the case when 'TaiXe' is null
+                    return RedirectToAction("ThongTinCaNhanTaiXe");
+                }
+            
+                var TaiXeDTO = new TaiXeDTO
+                {
+                    MaTX = TaiXe.MaTX,
+                    SoDienThoai = TaiXe.SoDienThoai,
+                    Ten = TaiXe.Ten,
+                    NgayThangNamSinh = TaiXe.NgayThangNamSinh.ToString("yyyy-MM-dd"),
+                    Email = TaiXe.Email,
+                    BienSo = TaiXe.BienSo,
+                    CCCD = TaiXe.CCCD,
+                    HinhAnh = TaiXe.HinhAnh
+                };
+            
+                return Json(TaiXeDTO, JsonRequestBehavior.AllowGet);
+            }
+            
+            
+            
+            [HttpPost]
+            public ActionResult SuaDoiTX(TaiXe tx, HttpPostedFileBase HinhAnhUpload, string OldHinhAnh)
+            {
+                var taiXeCu = db.TaiXes.SingleOrDefault(t => t.MaTX == tx.MaTX);
+                if (taiXeCu == null) return RedirectToAction("ThongTinCaNhanTaiXe");
+            
+                // cập nhật trường text
+                taiXeCu.Ten = tx.Ten;
+                taiXeCu.NgayThangNamSinh = tx.NgayThangNamSinh;
+                taiXeCu.Email = tx.Email;
+                taiXeCu.SoDienThoai = tx.SoDienThoai;
+                taiXeCu.BienSo = tx.BienSo;
+                taiXeCu.CCCD = tx.CCCD;
+            
+                // xử lý ảnh
+                if (HinhAnhUpload != null && HinhAnhUpload.ContentLength > 0)
+                {
+                    string fileName = uploadimage(HinhAnhUpload);   
+                    if (fileName != "-1") taiXeCu.HinhAnh = fileName;
+                }
+                else
+                {
+                    taiXeCu.HinhAnh = OldHinhAnh;                   
+                }
+            
+                db.SaveChanges();                                  
+                return RedirectToAction("ThongTinCaNhanTaiXe");
+            }
+            
+            public string uploadimage(HttpPostedFileBase file)
+            {
+                Random r = new Random();
+                string path = "-1";
+                int random = r.Next();
+                if (file != null && file.ContentLength > 0)
+                {
+                    string extension = Path.GetExtension(file.FileName);
+                    if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png"))
                     {
-                        path = Path.Combine(Server.MapPath("~/image/TaiXe"), random + Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-                        path = "" + random + Path.GetFileName(file.FileName);
+                        try
+                        {
+                            path = Path.Combine(Server.MapPath("~/image/TaiXe"), random + Path.GetFileName(file.FileName));
+                            file.SaveAs(path);
+                            path = "" + random + Path.GetFileName(file.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            path = "-1";
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        path = "-1";
+                        Response.Write("<script>alert('Only jpg, jpeg, or png formats are acceptable....');</script>");
                     }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Only jpg, jpeg, or png formats are acceptable....');</script>");
+                    Response.Write("<script>alert('Please select a file');</script>");
+                    path = "-1";
                 }
+                return path;
             }
-            else
-            {
-                Response.Write("<script>alert('Please select a file');</script>");
-                path = "-1";
-            }
-            return path;
-        }
         //public ActionResult ThongTinNhanChuyen()
         //{
         //    string a = Session["SoDienThoai"].ToString();
@@ -949,274 +959,192 @@ namespace WebsiteDatXeCongNghe.Controllers
 
 
         [HttpPost]
-        public ActionResult NapTien(decimal amount, string PhoneNumber, string SoThe)
-        {
-            try
-            {
-                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-                var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                // Validate the amount and input parameters if needed
-                if (amount < 10.000m)
-                {
-                    return Json(new { success = false, message = "Số tiền phải lớn hơn hoặc bằng 10.000 VNĐ." });
-                }
-                // Check if the amount is greater than the balance in TaiKhoanNganHangTaiXe
-                if (amount > taiKhoan.SoDu)
-                {
-                    return Json(new { success = false, message = "Không đủ tiền trong số dư thẻ." });
-                }
-
-                // Check if the amount is greater than the balance in TheVisa
-
-                if (visaAccount == null || amount > visaAccount.SoDu)
-                {
-                    return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
-                }
-
-                // Check if the TaiXe exists
-
-                if (taiXe == null)
-                {
-                    return Json(new { success = false, message = "Driver not found." });
-                }
-
-                // Check if the TaiKhoanNganHangTaiXe exists
-                
-                if (taiKhoan == null)
-                {
-                    return Json(new { success = false, message = "Bank account not found." });
-                }
-
-                string confirmationCode = GenerateConfirmationCode();
-
-                // Check if phoneNumber contains "@"
-                if (PhoneNumber.Contains("@"))
-                {
-                    bool sentSuccessfully = SendConfirmationCodeByEmail(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via email" });
-                    }
-                }
-                else
-                {
-                    bool sentSuccessfully = SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via SMS" });
-                    }
-                }
-
-                // Store the confirmation code in Session
-                Session["ConfirmationCode"] = confirmationCode;
-
-                return Json(new { success = true, message = "Gửi mã OTP!", confirmationCode });
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
-            }
-        }
-
-
-        [HttpPost]
-        public ActionResult NapTien2(decimal amount, string PhoneNumber, string SoThe)
-        {
-            try
-            {
-                // Check if the TaiXe exists
-                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-                
-                // Check if the TaiKhoanNganHangTaiXe exists
-                var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-                
-                // Check if the amount is greater than the balance in TheVisa
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                
-                // Update the wallet balance in the TaiXe table
-                taiXe.ViTien += amount;
-
-                // Format the wallet balance with three decimal places
-                var formattedWalletBalance = taiXe.ViTien.ToString("F3");
-
-
-                // Deduct the amount from the SoDu column in the TaiKhoanNganHangTaiXe table
-                taiKhoan.SoDu -= amount;
-                var formattedBalanceCard = taiKhoan.SoDu.ToString("F3");
-                // Deduct the amount from the SoDu column in the TheVisa table
-                visaAccount.SoDu -= amount;
-
-                // Log the deposit transaction into LichSuGiaoDich table
-                var transaction = new LichSuGiaoDich
-                {
-                    SoDienThoai = PhoneNumber,
-                    NgayGiaoDich = DateTime.Now,
-                    LoaiGiaoDich = "Deposit", // Assuming "Deposit" is the transaction type for deposits
-                    SoTien = amount
-                };
-
-                db.LichSuGiaoDiches.Add(transaction);
-
-                var formattedBalanceHistory = transaction.SoTien.ToString("F3");
-
-                // Save changes to the database
-                db.SaveChanges();
-
-                // Return the updated data in the response
-                return Json(new
-                {
-                    success = true,
-                    message = "Nạp thành công vào ví với số tiền: ",
-                    walletDriver = formattedWalletBalance,
-                    balanceCard = formattedBalanceCard,
-                    balanceHistory = formattedBalanceHistory
-                });
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
-            }
-        }
-
-        [HttpPost]
-        public ActionResult RutTien(decimal amount, string PhoneNumber, string SoThe)
-        {
-            try
-            {
-                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-                var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-                // Validate the amount and input parameters if needed
-                if (amount < 10.000m)
-                {
-                    return Json(new { success = false, message = "Số tiền phải lớn hơn hoặc bằng 10.000 VNĐ." });
-                }
-                // Check if the amount is greater than the wallet
-                if (amount > taiXe.ViTien)
-                {
-                    return Json(new { success = false, message = "Không đủ tiền trong ví." });
-                }
-
-                //// Check if the amount is greater than the balance in TheVisa
-
-                //if (visaAccount == null || amount > visaAccount.SoDu)
-                //{
-                //    return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
-                //}
-
-                // Check if the TaiXe exists
-
-                if (taiXe == null)
-                {
-                    return Json(new { success = false, message = "Driver not found." });
-                }
-
-                // Check if the TaiKhoanNganHangTaiXe exists
-
-                if (taiKhoan == null)
-                {
-                    return Json(new { success = false, message = "Bank account not found." });
-                }
-
-                string confirmationCode = GenerateConfirmationCode();
-
-                // Check if phoneNumber contains "@"
-                if (PhoneNumber.Contains("@"))
-                {
-                    bool sentSuccessfully = SendConfirmationCodeByEmail(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via email" });
-                    }
-                }
-                else
-                {
-                    bool sentSuccessfully = SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
-
-                    if (!sentSuccessfully)
-                    {
-                        return Json(new { success = false, message = "Failed to send confirmation code via SMS" });
-                    }
-                }
-
-                // Store the confirmation code in Session
-                Session["ConfirmationCode"] = confirmationCode;
-
-                return Json(new { success = true, message = "Gửi mã OTP!", confirmationCode });
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
-            }
-        }
-
-
-        [HttpPost]
-        public ActionResult RutTien2(decimal amount, string PhoneNumber, string SoThe)
-        {
-            try
-            {
-                // Check if the TaiXe exists
-                var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
-
-                // Check if the TaiKhoanNganHangTaiXe exists
-                var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
-
-                // Check if the amount is greater than the balance in TheVisa
-                var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
-
-                // Update the wallet balance in the TaiXe table
-                taiXe.ViTien -= amount;
-
-                // Format the wallet balance with three decimal places
-                var formattedWalletBalance = taiXe.ViTien.ToString("F3");
-
-
-                // Deduct the amount from the SoDu column in the TaiKhoanNganHangTaiXe table
-                taiKhoan.SoDu += amount;
-                var formattedBalanceCard = taiKhoan.SoDu.ToString("F3");
-                // Deduct the amount from the SoDu column in the TheVisa table
-                visaAccount.SoDu += amount;
-
-                // Log the withdrawal transaction into LichSuGiaoDich table
-                var transaction = new LichSuGiaoDich
-                {
-                    SoDienThoai = PhoneNumber,
-                    NgayGiaoDich = DateTime.Now,
-                    LoaiGiaoDich = "Withdrawal", // Assuming "Withdrawal" is the transaction type for withdrawal
-                    SoTien = amount
-                };
-
-                db.LichSuGiaoDiches.Add(transaction);
-
-                var formattedBalanceHistory = transaction.SoTien.ToString("F3");
-
-                // Save changes to the database
-                db.SaveChanges();
-
-                // Return the updated data in the response
-                return Json(new
-                {
-                    success = true,
-                    message = "Rút thành công từ ví với số tiền: ",
-                    walletDriver = formattedWalletBalance,
-                    balanceCard = formattedBalanceCard,
-                    balanceHistory = formattedBalanceHistory
-                });
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception as needed
-                return Json(new { success = false, message = $"Error: {ex.Message}" });
-            }
-        }
+         public ActionResult NapTien(decimal amount, string PhoneNumber, string SoThe)
+         {
+             try
+             {
+                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
+                 var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
+        
+                 /*--- Quy đổi số dư DB sang đồng ---*/
+                 decimal soDuTheDong = taiKhoan.SoDu * 1000m;      // 2 500  → 2 500 000
+                 decimal soDuVisaDong = (decimal)(visaAccount.SoDu * 1000m);
+                 // === 1. Kiểm tra tham số ===
+                 if (amount < 10000m)                           // 10 000 VNĐ
+                     return Json(new { success = false, message = "Số tiền phải ≥ 10 000 VNĐ." });
+        
+                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
+                 if (taiXe == null)
+                     return Json(new { success = false, message = "Driver not found." });
+        
+                 if (taiKhoan == null)
+                     return Json(new { success = false, message = "Bank account not found." });
+        
+                 if (visaAccount == null)
+                     return Json(new { success = false, message = "Visa account not found." });
+        
+                 // === 2. Kiểm tra số dư ===
+                 if (amount > soDuTheDong)
+                     return Json(new { success = false, message = "Không đủ tiền trong số dư thẻ.",
+                         debugAmount = amount,          // số tiền client gửi (đồng)
+                         debugSoDu = taiKhoan.SoDu
+                     });
+        
+                 if (amount > soDuVisaDong)
+                     return Json(new { success = false, message = "Không đủ tiền trong tài khoản Visa." });
+        
+                 // === 3. Gửi OTP ===
+                 string confirmationCode = GenerateConfirmationCode();
+                 bool sentSuccessfully = PhoneNumber.Contains("@")
+                                         ? SendConfirmationCodeByEmail(PhoneNumber, confirmationCode)
+                                         : SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
+        
+                 if (!sentSuccessfully)
+                     return Json(new { success = false, message = "Failed to send confirmation code." });
+        
+                 Session["ConfirmationCode"] = confirmationCode;
+        
+                 return Json(new { success = true, message = "Gửi mã OTP!" });
+             }
+             catch (Exception ex)
+             {
+                 return Json(new { success = false, message = $"Error: {ex.Message}" });
+             }
+         }
+        
+         [HttpPost]
+         public ActionResult NapTien2(decimal amount, string PhoneNumber, string SoThe)
+         {
+             try
+             {
+                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
+                 var tkBank = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
+                 var tkVisa = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
+        
+                 if (taiXe == null || tkBank == null || tkVisa == null)
+                     return Json(new { success = false, message = "Tài khoản không tồn tại." });
+        
+                 /* --- Quy đổi SoDu DB sang ĐỒNG để kiểm tra --- */
+                 decimal soDuTheDong = tkBank.SoDu * 1000m;
+                 decimal soDuVisaDong = (decimal)(tkVisa.SoDu * 1000m);
+        
+                 if (amount > soDuTheDong || amount > soDuVisaDong)
+                     return Json(new { success = false, message = "Không đủ tiền (sau OTP)." });
+        
+                 /* --- TRỪ TIỀN --- */
+                 taiXe.ViTien += amount/1000m;           // Ví = đồng
+        
+                 soDuTheDong -= amount;
+                 soDuVisaDong -= amount;
+        
+                 tkBank.SoDu = soDuTheDong / 1000m;   // ghi lại về NGHÌN
+                 tkVisa.SoDu = soDuVisaDong / 1000m;
+        
+                 db.LichSuGiaoDiches.Add(new LichSuGiaoDich
+                 {
+                     SoDienThoai = PhoneNumber,
+                     NgayGiaoDich = DateTime.Now,
+                     LoaiGiaoDich = "Deposit",
+                     SoTien = amount
+                 });
+        
+                 db.SaveChanges();
+        
+                 var viCulture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+        
+                 return Json(new
+                 {
+                     success = true,
+                     message = "Nạp thành công!",
+                     walletDriver = taiXe.ViTien.ToString("N0", viCulture),               // đồng
+                     balanceCard = (tkBank.SoDu * 1000m).ToString("N0", viCulture),      // đồng
+                     balanceHistory = amount.ToString("N0", viCulture)                      // đồng
+                 });
+             }
+             catch (Exception ex)
+             {
+                 return Json(new { success = false, message = ex.ToString() });
+             }
+         }
+        
+         [HttpPost]
+         public ActionResult RutTien(decimal amount, string PhoneNumber, string SoThe)
+         {
+             try
+             {
+                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
+                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
+                 decimal viTienDong = taiXe.ViTien * 1000m;
+                 if (amount < 10000m)
+                     return Json(new { success = false, message = "Số tiền phải ≥ 10.000 VNĐ." });
+        
+                 if (taiXe == null || taiKhoan == null)
+                     return Json(new { success = false, message = "Không tìm thấy tài khoản." });
+        
+                 if (amount > viTienDong)
+                     return Json(new { success = false, message = "Không đủ tiền trong ví." });
+        
+                 // Gửi mã OTP
+                 string confirmationCode = GenerateConfirmationCode();
+                 bool sent = PhoneNumber.Contains("@")
+                     ? SendConfirmationCodeByEmail(PhoneNumber, confirmationCode)
+                     : SendConfirmationCodeBySMS(PhoneNumber, confirmationCode);
+        
+                 if (!sent)
+                     return Json(new { success = false, message = "Gửi OTP thất bại." });
+        
+                 Session["ConfirmationCode"] = confirmationCode;
+                 return Json(new { success = true, message = "Gửi mã OTP!" });
+             }
+             catch (Exception ex)
+             {
+                 return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+             }
+         }
+        
+         [HttpPost]
+         public ActionResult RutTien2(decimal amount, string PhoneNumber, string SoThe)
+         {
+             try
+             {
+                 var taiXe = db.TaiXes.FirstOrDefault(t => t.SoDienThoai == PhoneNumber);
+                 var taiKhoan = db.TaiKhoanNganHangTaiXes.FirstOrDefault(t => t.SoThe == SoThe);
+                 var visaAccount = db.TheVisas.FirstOrDefault(v => v.SoThe == SoThe);
+        
+                 if (taiXe == null || taiKhoan == null || visaAccount == null)
+                     return Json(new { success = false, message = "Tài khoản không tồn tại." });
+        
+                 taiXe.ViTien -= amount/1000m;
+                 taiKhoan.SoDu += amount / 1000m;
+                 visaAccount.SoDu += amount / 1000m;
+        
+                 var transaction = new LichSuGiaoDich
+                 {
+                     SoDienThoai = PhoneNumber,
+                     NgayGiaoDich = DateTime.Now,
+                     LoaiGiaoDich = "Withdrawal",
+                     SoTien = amount
+                 };
+        
+                 db.LichSuGiaoDiches.Add(transaction);
+                 db.SaveChanges();
+        
+                 var viCulture = CultureInfo.GetCultureInfo("vi-VN");
+        
+                 return Json(new
+                 {
+                     success = true,
+                     message = "Đã rút thành công số tiền:",
+                     walletDriver = taiXe.ViTien.ToString("N0", viCulture),
+                     balanceCard = (taiKhoan.SoDu * 1000m).ToString("N0", viCulture),
+                     balanceHistory = amount.ToString("N0", viCulture)
+                 });
+             }
+             catch (Exception ex)
+             {
+                 return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+             }
+         }
 
 
 
