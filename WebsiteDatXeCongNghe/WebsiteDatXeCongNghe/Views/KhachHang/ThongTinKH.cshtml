@@ -71,8 +71,9 @@
                                 <td>@item.Email</td>
                                 <td><img src="~/image/KhachHang/@item.HinhAnh" style="height: 150px;width: 150px" id="avatar-image"></td>
                                 <td class="btn-edit js-edit">
-                                    <a onclick="SuaDoiKH('@item.MaKH')"><i class="ti-pencil"></i></a>
-                                </td>
+                                     <!-- Correct version if MaKH is int -->
+                                     <a onclick="SuaDoiKH(@item.MaKH)"><i class="ti-pencil"></i></a>
+                                 </td>
                             </tr>
                         }
 
@@ -191,27 +192,51 @@
             }
         }
 
-        function SuaDoiKH(MaKH) {
-            $.ajax({
-                type: 'GET',
-                url: '/KhachHang/SuaDoiKH',
-                data: { id: parseInt(MaKH) },
-                success: function (data) {
-                    $('#MaKH').val(data.MaKH);
-                    $('#SoDienThoai').val(data.SoDienThoai);
-                    $('#Ten').val(data.Ten);
-                    $('#NgayThangNamSinh').val(data.NgayThangNamSinh.split('T')[0]);
-                    $('#CCCD').val(data.CCCD);
-                    $('#Email').val(data.Email);
-                    $('#avatar-image').attr('src', '/image/KhachHang/' + data.HinhAnh);
-                    $('.form-edit').addClass('open-edit');
-                },
-                error: function () {
-                    alert('Lỗi!');
-                }
-            });
-        }
+           function SuaDoiKH(MaKH) {
+        $.ajax({
+            type: 'GET',
+            url: '/KhachHang/SuaDoiKH',
+            data: { id: MaKH },
+            success: function (data) {
+                console.log("Received data:", data); // ✅ check what's coming
 
+                $('#MaKH').val(data.MaKH);
+                $('#SoDienThoai').val(data.SoDienThoai);
+                $('#Ten').val(data.Ten);
+
+                try {
+                    let matches = /\/Date\((\d+)\)\//.exec(data.NgayThangNamSinh);
+                    if (matches && matches[1]) {
+                        let ticks = parseInt(matches[1]);
+                        let date = new Date(ticks);
+
+                        let localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+                        let formattedDate = localDate.toISOString().split('T')[0];
+
+                        $('#NgayThangNamSinh').val(formattedDate);
+                    } else {
+                        console.warn("Invalid date format:", data.NgayThangNamSinh);
+                    }
+                } catch (err) {
+                    console.error("Error parsing date:", err);
+                }
+
+                $('#CCCD').val(data.CCCD);
+                $('#Email').val(data.Email);
+
+                // Only set image if HinhAnh is not null or empty
+                if (data.HinhAnh) {
+                    $('#avatar-image').attr('src', '/image/KhachHang/' + data.HinhAnh);
+                }
+
+                $('.form-edit').addClass('open-edit');
+            },
+            error: function (xhr) {
+                console.error("AJAX error:", xhr);
+                alert('Lỗi!');
+            }
+        });
+    }
 
         $(document).ready(function () {
             $('.btn-close').click(function () {
